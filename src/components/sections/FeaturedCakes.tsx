@@ -1,11 +1,20 @@
+
 "use client";
 
 import { motion } from "framer-motion";
 import { CAKE_VARIANTS } from "@/lib/constants";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export function FeaturedCakes() {
+  const productImages = [
+    PlaceHolderImages.find(img => img.id === "vanilla-product"),
+    PlaceHolderImages.find(img => img.id === "strawberry-product"),
+    PlaceHolderImages.find(img => img.id === "chocolate-product"),
+    PlaceHolderImages.find(img => img.id === "blackforest-product")
+  ];
+
   return (
     <section id="cakes" className="py-24 px-6 md:px-12 bg-background relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -33,10 +42,10 @@ export function FeaturedCakes() {
               <Card className="bg-muted/50 border-white/5 overflow-hidden rounded-none h-full relative">
                 <div className="aspect-[4/5] overflow-hidden relative">
                    <img 
-                    src={`https://picsum.photos/seed/${cake.id}/800/1000`} 
+                    src={productImages[i]?.imageUrl} 
                     alt={cake.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[0.5] group-hover:grayscale-0"
-                    data-ai-hint="luxury cake dessert"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[0.3] group-hover:grayscale-0"
+                    data-ai-hint={productImages[i]?.imageHint}
                    />
                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                    <Badge className="absolute top-4 left-4 rounded-none bg-primary text-primary-foreground font-bold tracking-widest text-[10px] py-1 px-3">

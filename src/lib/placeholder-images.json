@@ -1,3 +1,88 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "vanilla-product",
+      "description": "Vanilla Dream signature cake on a minimalist pedestal",
+      "imageUrl": "https://picsum.photos/seed/v-cake/800/1000",
+      "imageHint": "luxury cake"
+    },
+    {
+      "id": "strawberry-product",
+      "description": "Strawberry Bliss cake with fresh berry textures",
+      "imageUrl": "https://picsum.photos/seed/s-cake/800/1000",
+      "imageHint": "strawberry dessert"
+    },
+    {
+      "id": "chocolate-product",
+      "description": "Chocolate Decadence glossy ganache cake",
+      "imageUrl": "https://picsum.photos/seed/c-cake/800/1000",
+      "imageHint": "chocolate cake"
+    },
+    {
+      "id": "blackforest-product",
+      "description": "Black Forest Royale editorial cake shot",
+      "imageUrl": "https://picsum.photos/seed/bf-cake/800/1000",
+      "imageHint": "black forest"
+    },
+    {
+      "id": "ingredient-vanilla",
+      "description": "Macro shot of Madagascar vanilla beans",
+      "imageUrl": "https://picsum.photos/seed/macro-v/600/600",
+      "imageHint": "vanilla pods"
+    },
+    {
+      "id": "ingredient-cocoa",
+      "description": "Macro shot of Belgian cocoa shards",
+      "imageUrl": "https://picsum.photos/seed/macro-c/600/600",
+      "imageHint": "cocoa chocolate"
+    },
+    {
+      "id": "ingredient-berry",
+      "description": "Macro shot of wild forest berries",
+      "imageUrl": "https://picsum.photos/seed/macro-b/600/600",
+      "imageHint": "wild berries"
+    },
+    {
+      "id": "ingredient-cream",
+      "description": "Silky organic cream swirl",
+      "imageUrl": "https://picsum.photos/seed/macro-cr/600/600",
+      "imageHint": "whipped cream"
+    },
+    {
+      "id": "gallery-1",
+      "description": "CakeStory masterpiece large",
+      "imageUrl": "https://picsum.photos/seed/gal-1/800/800",
+      "imageHint": "luxury cake"
+    },
+    {
+      "id": "gallery-2",
+      "description": "Dessert pastry close-up",
+      "imageUrl": "https://picsum.photos/seed/gal-2/800/800",
+      "imageHint": "pastry dessert"
+    },
+    {
+      "id": "gallery-3",
+      "description": "Cake slice on artisanal plate",
+      "imageUrl": "https://picsum.photos/seed/gal-3/800/800",
+      "imageHint": "cake slice"
+    },
+    {
+      "id": "gallery-4",
+      "description": "Luxury bakery display",
+      "imageUrl": "https://picsum.photos/seed/gal-4/800/800",
+      "imageHint": "bakery display"
+    },
+    {
+      "id": "gallery-5",
+      "description": "Celebration event cake centerpiece",
+      "imageUrl": "https://picsum.photos/seed/gal-5/800/800",
+      "imageHint": "celebration cake"
+    },
+    {
+      "id": "cta-bg",
+      "description": "Luxury bakery interior at night",
+      "imageUrl": "https://picsum.photos/seed/bakery-night/1920/1080",
+      "imageHint": "luxury bakery"
+    }
+  ]
 }

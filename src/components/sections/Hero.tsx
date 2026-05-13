@@ -1,14 +1,23 @@
+
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { CAKE_VARIANTS } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export function Hero() {
   const [currentIdx, setCurrentIdx] = useState(0);
   const variant = CAKE_VARIANTS[currentIdx];
+
+  const productImages = useMemo(() => [
+    PlaceHolderImages.find(img => img.id === "vanilla-product"),
+    PlaceHolderImages.find(img => img.id === "strawberry-product"),
+    PlaceHolderImages.find(img => img.id === "chocolate-product"),
+    PlaceHolderImages.find(img => img.id === "blackforest-product")
+  ], []);
 
   const nextFlavor = useCallback(() => {
     setCurrentIdx((prev) => (prev + 1) % CAKE_VARIANTS.length);
@@ -20,26 +29,22 @@ export function Hero() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
-      {/* Background System */}
+      {/* Cinematic Animated Background Layer */}
       <AnimatePresence mode="wait">
         <motion.div
           key={variant.id + "-bg"}
-          initial={{ opacity: 0, filter: "blur(20px) brightness(0.5)" }}
-          animate={{ opacity: 1, filter: "blur(0px) brightness(1)" }}
-          exit={{ opacity: 0, filter: "blur(20px) brightness(0.5)" }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-0 z-0"
         >
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="h-full w-full object-cover scale-105"
-          >
-            <source src={variant.backgroundUrl} type="video/webp" />
-            <img src={variant.backgroundUrl} className="h-full w-full object-cover" alt="Cinematic background" />
-          </video>
+          {/* Using img for animated WebP assets as they behave like gifs but higher quality */}
+          <img 
+            src={variant.backgroundUrl} 
+            className="h-full w-full object-cover" 
+            alt="Cinematic background" 
+          />
           <div className="absolute inset-0 bg-black/40" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
         </motion.div>
@@ -91,13 +96,40 @@ export function Hero() {
           </AnimatePresence>
         </div>
 
-        {/* Floating Product (Abstracted by the high-quality video bg, but we can add a subtle overlay if needed) */}
-        <div className="hidden md:flex justify-center items-center h-full">
-           {/* If we had separate 3D cake transparent webps, they would go here. Using background for simplicity given constraints */}
+        {/* Floating Product Composition */}
+        <div className="hidden md:flex justify-center items-center h-full relative">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={variant.id + "-product"}
+              initial={{ opacity: 0, scale: 0.8, y: 50, rotate: -5 }}
+              animate={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
+              exit={{ opacity: 0, scale: 1.2, y: -50, rotate: 5 }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="relative"
+            >
+              <div className="w-[450px] aspect-[4/5] relative group">
+                <img 
+                  src={productImages[currentIdx]?.imageUrl} 
+                  alt={variant.name}
+                  className="w-full h-full object-cover shadow-2xl rounded-sm border border-white/10 grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
+                  data-ai-hint={productImages[currentIdx]?.imageHint}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+                
+                {/* Decorative Elements */}
+                <motion.div 
+                  className="absolute -bottom-10 -right-10 w-32 h-32 blur-3xl opacity-50"
+                  style={{ backgroundColor: variant.themeColor }}
+                  animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.6, 0.3] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                />
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
 
-      {/* Right Side Controls */}
+      {/* Navigation Controls */}
       <div className="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-8 items-center">
         <div className="flex flex-col items-center gap-2">
            <span className="text-[10px] uppercase tracking-[0.3em] text-white/40 font-bold rotate-90 mb-8">Flavors</span>
@@ -126,7 +158,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Ingredient Particles (Simplified for React performance, visual representation) */}
+      {/* Dynamic Ingredient Particles */}
       <AnimatePresence>
          <motion.div 
            key={variant.id + "-particles"}
@@ -135,26 +167,25 @@ export function Hero() {
            animate={{ opacity: 1 }}
            exit={{ opacity: 0 }}
          >
-           {/* Mocking floating elements */}
-           {[...Array(6)].map((_, i) => (
+           {[...Array(8)].map((_, i) => (
              <motion.div
                key={i}
-               className="absolute rounded-full blur-xl"
+               className="absolute rounded-full blur-2xl"
                style={{
-                 width: Math.random() * 100 + 50,
-                 height: Math.random() * 100 + 50,
+                 width: Math.random() * 150 + 50,
+                 height: Math.random() * 150 + 50,
                  left: `${Math.random() * 100}%`,
                  top: `${Math.random() * 100}%`,
                  backgroundColor: variant.themeColor,
-                 opacity: 0.1
+                 opacity: 0.08
                }}
                animate={{
-                 y: [0, -40, 0],
-                 x: [0, 20, 0],
-                 scale: [1, 1.2, 1],
+                 y: [0, -100, 0],
+                 x: [0, 50, 0],
+                 scale: [1, 1.5, 1],
                }}
                transition={{
-                 duration: 10 + Math.random() * 5,
+                 duration: 15 + Math.random() * 10,
                  repeat: Infinity,
                  ease: "easeInOut",
                  delay: i * 0.5

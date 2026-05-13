@@ -1,12 +1,14 @@
+
 "use client";
 
 import { motion } from "framer-motion";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 const INGREDIENTS = [
-  { name: "Madagascar Vanilla", desc: "Aged for months for complex aromatic depth.", img: "vanilla" },
-  { name: "Belgian Cacao", desc: "70% dark single-origin chocolate shards.", img: "chocolate" },
-  { name: "Wild Berries", desc: "Hand-picked at peak ripeness for vibrant acidity.", img: "berries" },
-  { name: "Organic Cream", desc: "Double-thick pasture-raised dairy from local farms.", img: "cream" },
+  { name: "Madagascar Vanilla", desc: "Aged for months for complex aromatic depth.", imgId: "ingredient-vanilla" },
+  { name: "Belgian Cacao", desc: "70% dark single-origin chocolate shards.", imgId: "ingredient-cocoa" },
+  { name: "Wild Berries", desc: "Hand-picked at peak ripeness for vibrant acidity.", imgId: "ingredient-berry" },
+  { name: "Organic Cream", desc: "Double-thick pasture-raised dairy from local farms.", imgId: "ingredient-cream" },
 ];
 
 export function Ingredients() {
@@ -15,26 +17,29 @@ export function Ingredients() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="grid grid-cols-2 gap-4">
-            {INGREDIENTS.map((item, i) => (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={`relative aspect-square overflow-hidden rounded-2xl ${i % 2 === 1 ? 'translate-y-8' : ''}`}
-              >
-                <img 
-                  src={`https://picsum.photos/seed/${item.img}/500/500`} 
-                  alt={item.name}
-                  className="w-full h-full object-cover transition-transform duration-1000 hover:scale-110"
-                  data-ai-hint="macro food ingredient"
-                />
-                <div className="absolute inset-0 bg-black/40 flex items-end p-6">
-                  <span className="text-white font-headline text-xl">{item.name}</span>
-                </div>
-              </motion.div>
-            ))}
+            {INGREDIENTS.map((item, i) => {
+              const placeholder = PlaceHolderImages.find(img => img.id === item.imgId);
+              return (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className={`relative aspect-square overflow-hidden rounded-2xl ${i % 2 === 1 ? 'translate-y-8' : ''}`}
+                >
+                  <img 
+                    src={placeholder?.imageUrl} 
+                    alt={item.name}
+                    className="w-full h-full object-cover transition-transform duration-1000 hover:scale-110"
+                    data-ai-hint={placeholder?.imageHint}
+                  />
+                  <div className="absolute inset-0 bg-black/40 flex items-end p-6">
+                    <span className="text-white font-headline text-xl">{item.name}</span>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
 
           <div className="space-y-8">

@@ -1,17 +1,21 @@
+
 "use client";
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export function Contact() {
+  const bgImage = PlaceHolderImages.find(img => img.id === "cta-bg");
+
   return (
     <section id="contact" className="relative py-32 px-6 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://picsum.photos/seed/bakery-cta/1920/1080" 
+          src={bgImage?.imageUrl} 
           alt="CTA background"
           className="w-full h-full object-cover opacity-20"
-          data-ai-hint="bakery interior luxury"
+          data-ai-hint={bgImage?.imageHint}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background" />
       </div>
