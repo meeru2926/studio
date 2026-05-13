@@ -26,24 +26,24 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
 
   return (
     <section className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
-      {/* Background visual - Unobstructed Animated WebP */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center lg:justify-end pr-0 lg:pr-[5%]">
+      {/* Background visual - Now unrestricted in size to fit the screen */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center lg:justify-end">
          <AnimatePresence mode="wait">
             <motion.div
               key={variant.id + "-visual"}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.1 }}
+              initial={{ opacity: 0, scale: 0.9, x: 100 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              exit={{ opacity: 0, scale: 1.1, x: -100 }}
               transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full h-full max-w-[1000px] flex items-center justify-center relative"
+              className="w-full h-full flex items-center justify-center relative"
             >
               <img 
                 src={variant.backgroundUrl} 
-                className="w-full h-full object-contain pointer-events-none" 
+                className="w-full h-full object-contain lg:object-cover pointer-events-none" 
                 alt={`${variant.name} Cinematic Animation`} 
               />
-              {/* Cinematic Vignette/Fade specifically for text side */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent lg:w-1/2" />
+              {/* Cinematic Vignette for text readability */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent lg:w-1/2" />
             </motion.div>
          </AnimatePresence>
       </div>
