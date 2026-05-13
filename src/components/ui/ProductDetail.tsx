@@ -2,7 +2,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Plus, Minus, ShoppingBag, ChevronLeft, ChevronRight, Search, Star, CreditCard } from "lucide-react";
+import { X, Plus, Minus, ShoppingBag, ChevronLeft, ChevronRight, Search, Star, CreditCard, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CakeVariant, CAKE_VARIANTS } from "@/lib/constants";
 import { useState, useEffect } from "react";
@@ -63,9 +63,21 @@ export function ProductDetail({ product, onClose, onAddToCart, onBuyNow, onNavig
           
           {/* Top Navigation Row */}
           <header className="flex justify-between items-center mb-8">
-            <div className="flex flex-col">
-              <span className="font-headline text-xl tracking-tighter font-bold uppercase text-primary">CakeStory</span>
-              <span className="text-[6px] uppercase tracking-[0.4em] text-white/40 font-bold -mt-1">Your Delicious Choice!</span>
+            <div className="flex items-center gap-8">
+              <button 
+                onClick={onClose}
+                className="flex items-center gap-3 text-white/40 hover:text-white transition-colors group"
+              >
+                <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-1" />
+                <span className="text-[8px] uppercase tracking-[0.4em] font-bold hidden md:block">Back to Collection</span>
+              </button>
+              
+              <div className="h-8 w-[1px] bg-white/10 hidden md:block" />
+
+              <div className="flex flex-col">
+                <span className="font-headline text-xl tracking-tighter font-bold uppercase text-primary">CakeStory</span>
+                <span className="text-[6px] uppercase tracking-[0.4em] text-white/40 font-bold -mt-1">Your Delicious Choice!</span>
+              </div>
             </div>
 
             <div className="flex items-center gap-6 text-white/40">
@@ -132,7 +144,7 @@ export function ProductDetail({ product, onClose, onAddToCart, onBuyNow, onNavig
                     <span className="text-[7px] uppercase tracking-[0.4em] text-white/30 font-bold">Appraisal</span>
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} size={10} className={i < 4 ? "text-primary fill-primary" : "text-white/20"} />
+                        <Star key={i} size={10} className={i < Math.floor(product.rating) ? "text-primary fill-primary" : "text-white/20"} />
                       ))}
                     </div>
                   </div>
