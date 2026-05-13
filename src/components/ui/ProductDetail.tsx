@@ -44,8 +44,8 @@ export function ProductDetail({ product, onClose, onAddToCart }: ProductDetailPr
             <X size={24} />
           </Button>
 
-          {/* Cinematic Visual Showcase - Occupies 7/12 columns (approx 60%) */}
-          <div className="relative lg:col-span-7 h-[60vh] lg:h-full overflow-hidden bg-black flex items-center justify-center">
+          {/* Cinematic Visual Showcase - Occupies 7/12 columns */}
+          <div className="relative lg:col-span-7 h-[50vh] lg:h-full overflow-hidden bg-black flex items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={product.id + "-visual"}
@@ -53,16 +53,15 @@ export function ProductDetail({ product, onClose, onAddToCart }: ProductDetailPr
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full h-full relative"
+                className="w-full h-full relative flex items-center justify-center p-4 lg:p-12"
               >
                 <img 
                   src={product.backgroundUrl}
-                  className="w-full h-full object-cover lg:object-cover pointer-events-none"
+                  className="w-full h-full object-contain pointer-events-none"
                   alt={`${product.name} Cinematic Animation`}
                 />
-                {/* Visual Vignette Overlays for Depth */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent hidden lg:block" />
+                {/* Subtle depth vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20 pointer-events-none" />
               </motion.div>
             </AnimatePresence>
 
@@ -81,24 +80,24 @@ export function ProductDetail({ product, onClose, onAddToCart }: ProductDetailPr
           </div>
 
           {/* Editorial Content Panel - Occupies 5/12 columns */}
-          <div className="lg:col-span-5 p-10 lg:p-20 flex flex-col justify-between overflow-y-auto bg-black relative z-20">
-            <div className="space-y-16">
-              <div className="space-y-6">
+          <div className="lg:col-span-5 p-8 lg:p-16 flex flex-col justify-between overflow-y-auto bg-black relative z-20">
+            <div className="space-y-12">
+              <div className="space-y-4">
                 <span className="text-primary text-[10px] uppercase tracking-[0.8em] font-bold block">{product.subtitle}</span>
-                <h2 className="font-headline text-6xl lg:text-[7rem] text-white tracking-tighter leading-[0.85]">{product.name}</h2>
+                <h2 className="font-headline text-5xl lg:text-[6rem] text-white tracking-tighter leading-[0.85]">{product.name}</h2>
               </div>
               
-              <div className="space-y-8">
-                <p className="text-white/50 text-xl font-light leading-relaxed italic border-l-2 border-primary/20 pl-10 py-2">
+              <div className="space-y-6">
+                <p className="text-white/50 text-lg font-light leading-relaxed italic border-l border-primary/20 pl-6 py-1">
                   {product.longDescription}
                 </p>
 
-                <div className="grid grid-cols-2 gap-x-12 gap-y-8 pt-8">
+                <div className="grid grid-cols-2 gap-x-8 gap-y-6 pt-6">
                   {product.ingredients.map(ing => (
                     <div key={ing} className="flex flex-col gap-2 group">
-                      <div className="flex items-center gap-3">
-                        <div className="w-1.5 h-1.5 bg-primary/40 rounded-full group-hover:bg-primary transition-colors" />
-                        <span className="text-[11px] text-white/80 tracking-[0.2em] uppercase font-bold">{ing}</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-1 h-1 bg-primary/40 rounded-full group-hover:bg-primary transition-colors" />
+                        <span className="text-[10px] text-white/80 tracking-[0.2em] uppercase font-bold">{ing}</span>
                       </div>
                     </div>
                   ))}
@@ -106,48 +105,48 @@ export function ProductDetail({ product, onClose, onAddToCart }: ProductDetailPr
               </div>
             </div>
 
-            <div className="mt-20 space-y-12">
-              <div className="flex items-end justify-between border-b border-white/10 pb-10">
-                <div className="space-y-2">
+            <div className="mt-16 space-y-10">
+              <div className="flex items-end justify-between border-b border-white/10 pb-8">
+                <div className="space-y-1">
                   <span className="text-[10px] uppercase tracking-[0.4em] text-white/20 font-bold">Bespoke Commission</span>
-                  <p className="font-headline text-6xl text-white tracking-tighter">${product.price * qty}.00</p>
+                  <p className="font-headline text-5xl text-white tracking-tighter">${product.price * qty}.00</p>
                 </div>
                 
-                <div className="flex items-center gap-10">
+                <div className="flex items-center gap-8">
                   <button 
                     className="text-white/30 hover:text-white transition-colors"
                     onClick={() => setQty(Math.max(1, qty - 1))}
                   >
-                    <Minus size={18} />
+                    <Minus size={16} />
                   </button>
-                  <span className="text-3xl font-bold font-headline w-8 text-center">{qty}</span>
+                  <span className="text-2xl font-bold font-headline w-6 text-center">{qty}</span>
                   <button 
                     className="text-white/30 hover:text-white transition-colors"
                     onClick={() => setQty(qty + 1)}
                   >
-                    <Plus size={18} />
+                    <Plus size={16} />
                   </button>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                   size="lg" 
-                  className="flex-1 h-24 rounded-none bg-white text-black text-[12px] font-bold uppercase tracking-[0.5em] hover:bg-white/90 shadow-2xl transition-all hover:scale-[1.02]"
+                  className="flex-1 h-20 rounded-none bg-white text-black text-[11px] font-bold uppercase tracking-[0.5em] hover:bg-white/90 shadow-2xl transition-all hover:scale-[1.02]"
                   onClick={() => {
                     onAddToCart(product, qty);
                     onClose();
                   }}
                 >
-                  <CreditCard size={16} className="mr-4" /> Finalize Purchase
+                  <CreditCard size={14} className="mr-3" /> Finalize Purchase
                 </Button>
                 <Button 
                   size="lg" 
                   variant="outline"
-                  className="h-24 w-24 rounded-none border-white/10 bg-white/5 text-white hover:bg-white hover:text-black transition-all"
+                  className="h-20 w-20 rounded-none border-white/10 bg-white/5 text-white hover:bg-white hover:text-black transition-all"
                   onClick={() => onAddToCart(product, qty)}
                 >
-                  <ShoppingBag size={28} />
+                  <ShoppingBag size={24} />
                 </Button>
               </div>
             </div>

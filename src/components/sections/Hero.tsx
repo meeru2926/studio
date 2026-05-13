@@ -26,24 +26,25 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
 
   return (
     <section className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
-      {/* Background visual - Now unrestricted in size to fit the screen */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center lg:justify-end">
+      {/* Background Visual Container */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center">
          <AnimatePresence mode="wait">
             <motion.div
               key={variant.id + "-visual"}
-              initial={{ opacity: 0, scale: 0.9, x: 100 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              exit={{ opacity: 0, scale: 1.1, x: -100 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
               transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full h-full flex items-center justify-center relative"
+              className="w-full h-full flex items-center justify-center p-8 lg:p-24"
             >
               <img 
                 src={variant.backgroundUrl} 
-                className="w-full h-full object-contain lg:object-cover pointer-events-none" 
+                className="w-full h-full object-contain pointer-events-none" 
                 alt={`${variant.name} Cinematic Animation`} 
               />
-              {/* Cinematic Vignette for text readability */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent lg:w-1/2" />
+              {/* Cinematic Vignette for atmosphere */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none h-1/3 bottom-0" />
             </motion.div>
          </AnimatePresence>
       </div>
