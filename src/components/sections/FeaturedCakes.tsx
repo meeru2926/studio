@@ -14,20 +14,20 @@ interface FeaturedCakesProps {
 
 export function FeaturedCakes({ onViewDetails, onAddToCart }: FeaturedCakesProps) {
   return (
-    <section id="cakes" className="py-40 px-6 md:px-12 bg-background relative border-t border-white/5">
+    <section id="cakes" className="py-32 px-6 md:px-12 bg-background relative border-t border-white/5">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-32 space-y-4">
-           <span className="text-primary uppercase tracking-[1em] text-[10px] font-bold block ml-2">The Editorial Collection</span>
-           <h2 className="font-headline text-[15vw] md:text-[12rem] text-white leading-[0.7] tracking-tighter">
+        <div className="mb-20 space-y-4">
+           <span className="text-primary uppercase tracking-[0.8em] text-[10px] font-bold block">The Editorial Collection</span>
+           <h2 className="font-headline text-5xl md:text-7xl text-white leading-none tracking-tighter">
             Commissions
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           {CAKE_VARIANTS.map((cake, i) => (
             <motion.div
               key={cake.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 1, ease: [0.22, 1, 0.36, 1] }}
@@ -54,13 +54,13 @@ export function FeaturedCakes({ onViewDetails, onAddToCart }: FeaturedCakesProps
                    </div>
                 </div>
                 
-                <CardContent className="px-0 py-8 space-y-6 flex-1 flex flex-col">
-                  <div className="space-y-2">
+                <CardContent className="px-0 py-6 space-y-4 flex-1 flex flex-col">
+                  <div className="space-y-1">
                     <div className="flex justify-between items-baseline">
-                      <h3 className="font-headline text-xl text-white group-hover:text-primary transition-colors tracking-tight">{cake.name}</h3>
+                      <h3 className="font-headline text-lg text-white group-hover:text-primary transition-colors tracking-tight">{cake.name}</h3>
                       <span className="text-primary text-[10px] font-bold tracking-widest font-headline">₹{cake.price.toLocaleString()}</span>
                     </div>
-                    <p className="text-[9px] uppercase tracking-[0.3em] text-white/30 font-bold leading-relaxed">
+                    <p className="text-[8px] uppercase tracking-[0.3em] text-white/30 font-bold leading-relaxed">
                       {cake.subtitle}
                     </p>
                   </div>
@@ -71,9 +71,9 @@ export function FeaturedCakes({ onViewDetails, onAddToCart }: FeaturedCakesProps
                     ))}
                   </div>
 
-                  <div className="pt-6 border-t border-white/5 mt-auto flex gap-3">
+                  <div className="pt-4 border-t border-white/5 mt-auto flex gap-2">
                     <Button 
-                      className="flex-1 rounded-none bg-white/5 text-white border border-white/10 text-[8px] uppercase tracking-[0.4em] font-bold hover:bg-white hover:text-black transition-all h-11"
+                      className="flex-1 rounded-none bg-white/5 text-white border border-white/10 text-[8px] uppercase tracking-[0.4em] font-bold hover:bg-white hover:text-black transition-all h-10"
                       onClick={() => onAddToCart(cake)}
                     >
                       Add to Selection
@@ -81,7 +81,7 @@ export function FeaturedCakes({ onViewDetails, onAddToCart }: FeaturedCakesProps
                     <Button 
                       variant="ghost" 
                       size="icon" 
-                      className="rounded-none border border-white/10 text-white/40 hover:text-white h-11 w-11"
+                      className="rounded-none border border-white/10 text-white/40 hover:text-white h-10 w-10"
                       onClick={() => onViewDetails(cake)}
                     >
                       <ArrowUpRight size={14} />
