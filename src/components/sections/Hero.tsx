@@ -24,71 +24,73 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
   }, []);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
+    <section className="relative h-screen w-full overflow-hidden bg-black">
+      {/* Seamless Fullscreen Background */}
       <div className="absolute inset-0 z-0">
-         <AnimatePresence mode="wait">
-            <motion.div
-              key={variant.id + "-visual"}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full h-full flex items-center justify-center"
-            >
-              <img 
-                src={variant.backgroundUrl} 
-                className="w-full h-full object-contain pointer-events-none" 
-                alt={variant.name} 
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black/60" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent h-1/2 bottom-0" />
-            </motion.div>
-         </AnimatePresence>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={variant.id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="relative w-full h-full flex items-center justify-center bg-black"
+          >
+            <img
+              src={variant.backgroundUrl}
+              className="w-full h-full object-contain pointer-events-none"
+              alt={variant.name}
+            />
+            {/* Soft dark overlays for text readability only - no sharp cuts */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+          </motion.div>
+        </AnimatePresence>
       </div>
 
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-10 h-full flex flex-col justify-between pt-40 pb-20">
-        <div className="flex items-center gap-6 overflow-hidden">
-          <motion.div 
-            initial={{ width: 0 }}
-            animate={{ width: 24 }}
-            className="h-[1px] bg-primary/40"
-          />
-          <span className="text-[7px] uppercase tracking-[0.8em] font-bold text-primary/60">
-            {variant.subtitle}
-          </span>
+      {/* Content Overlay */}
+      <div className="relative z-10 w-full h-full max-w-[1440px] mx-auto px-8 md:px-20 flex flex-col justify-center">
+        
+        {/* Editorial Text Block */}
+        <div className="space-y-8 max-w-xl">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={variant.id + "-info"}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="space-y-4"
+            >
+              <div className="flex items-center gap-4">
+                <div className="h-[1px] w-8 bg-primary/40" />
+                <span className="text-[7px] uppercase tracking-[0.6em] font-bold text-primary">
+                  {variant.subtitle}
+                </span>
+              </div>
+              
+              <h1 className="font-headline text-6xl md:text-8xl text-white tracking-tighter leading-[0.9] flex flex-col">
+                {variant.name.split(' ').map((word, i) => (
+                  <span key={i}>{word}</span>
+                ))}
+              </h1>
+              
+              <p className="text-white/40 text-lg font-light italic leading-relaxed max-w-xs border-l border-primary/20 pl-6">
+                {variant.description}
+              </p>
+
+              <div className="flex items-baseline gap-4 pt-4">
+                <span className="text-[8px] uppercase tracking-[0.4em] text-white/20 font-bold">Commission</span>
+                <p className="font-headline text-3xl text-white">₹{variant.price.toLocaleString()}</p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-32 items-end">
-          <div className="space-y-8">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={variant.id + "-text"}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="space-y-4"
-              >
-                <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl text-white tracking-tighter leading-[0.95]">
-                  {variant.name.split(' ').map((word, i) => (
-                    <span key={i} className="block">{word}</span>
-                  ))}
-                </h1>
-                
-                <p className="text-sm md:text-base text-white/40 leading-relaxed font-light max-w-xs italic border-l border-primary/20 pl-6">
-                  {variant.description}
-                </p>
-
-                <div className="flex items-baseline gap-4 pt-4">
-                  <span className="text-[7px] uppercase tracking-[0.4em] text-white/20 font-bold">Commission</span>
-                  <p className="font-headline text-2xl text-white">₹{variant.price.toLocaleString()}</p>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-
-        <div className="flex flex-col md:flex-row items-end justify-between gap-12">
+        {/* Action Controls & Navigation Footer */}
+        <div className="absolute bottom-12 left-8 md:left-20 right-8 md:right-20 flex flex-col md:flex-row items-end justify-between gap-12">
+          
+          {/* Flavor Selection Navigation */}
           <div className="flex gap-1">
             <Button 
               variant="ghost" 
@@ -108,21 +110,23 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
             </Button>
           </div>
 
+          {/* Ecommerce Actions */}
           <div className="flex items-stretch gap-1 w-full md:w-auto h-14">
             <Button 
-              className="flex-1 md:flex-none px-12 rounded-none bg-white text-black font-bold uppercase tracking-[0.4em] text-[8px] hover:bg-white/90 transition-all"
+              className="flex-1 md:flex-none px-12 rounded-none bg-white text-black font-bold uppercase tracking-[0.4em] text-[8px] hover:bg-white/90 transition-all shadow-2xl"
               onClick={() => onOrder(variant)}
             >
               <CreditCard size={10} className="mr-3" /> Buy Now
             </Button>
             <Button 
               variant="outline"
-              className="flex-1 md:flex-none px-12 rounded-none border-white/20 text-white bg-black/40 backdrop-blur-md font-bold uppercase tracking-[0.4em] text-[8px] hover:bg-white hover:text-black transition-all"
+              className="flex-1 md:flex-none px-12 rounded-none border-white/10 text-white bg-black/40 backdrop-blur-xl font-bold uppercase tracking-[0.4em] text-[8px] hover:bg-white hover:text-black transition-all"
               onClick={() => onAddToCart(variant)}
             >
               <ShoppingBag size={10} className="mr-3" /> Add to Cart
             </Button>
           </div>
+
         </div>
       </div>
     </section>
