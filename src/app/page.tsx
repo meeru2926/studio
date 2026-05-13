@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -13,6 +12,7 @@ import { Contact } from "@/components/sections/Contact";
 import { CartDrawer } from "@/components/ui/CartDrawer";
 import { ProductDetail } from "@/components/ui/ProductDetail";
 import { CakeVariant } from "@/lib/constants";
+import { Toaster } from "@/components/ui/toaster";
 
 export type CartItem = {
   cake: CakeVariant;
@@ -48,6 +48,10 @@ export default function Home() {
 
   const removeFromCart = (id: string) => {
     setCart((prev) => prev.filter((item) => item.cake.id !== id));
+  };
+
+  const clearCart = () => {
+    setCart([]);
   };
 
   return (
@@ -86,7 +90,8 @@ export default function Home() {
             isOpen={isCartOpen} 
             onClose={() => setIsCartOpen(false)} 
             items={cart} 
-            onRemove={removeFromCart} 
+            onRemove={removeFromCart}
+            onClearCart={clearCart}
           />
 
           <ProductDetail 
@@ -97,6 +102,7 @@ export default function Home() {
           />
         </motion.div>
       )}
+      <Toaster />
     </main>
   );
 }
