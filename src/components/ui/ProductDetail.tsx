@@ -1,4 +1,3 @@
-
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -40,18 +39,18 @@ export function ProductDetail({ product, onClose, onAddToCart, onNavigate }: Pro
           <AnimatePresence mode="wait">
             <motion.div
               key={product.id + "-detail-bg"}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
               className="relative w-full h-full bg-black flex items-center justify-center"
             >
               <img
                 src={product.backgroundUrl}
-                className="w-full h-full object-contain opacity-70"
+                className="w-full h-full object-contain"
                 alt={product.name}
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60" />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40" />
             </motion.div>
           </AnimatePresence>
@@ -92,12 +91,19 @@ export function ProductDetail({ product, onClose, onAddToCart, onNavigate }: Pro
               className="space-y-6"
             >
               <div className="space-y-3">
-                <span className="text-primary text-[8px] uppercase tracking-[0.6em] font-bold block">
-                  {product.subtitle}
-                </span>
+                <div className="flex items-center gap-3">
+                  <span className="text-primary text-[8px] uppercase tracking-[0.6em] font-bold block">
+                    {product.subtitle}
+                  </span>
+                  <div className="h-[1px] w-6 bg-primary/20" />
+                  <span className="text-white/40 text-[7px] uppercase tracking-[0.4em] font-bold">{product.tagline}</span>
+                </div>
                 <h2 className="font-headline text-5xl md:text-6xl text-white tracking-tighter leading-none max-w-md">
                   {product.name}
                 </h2>
+                <p className="text-primary/60 text-[9px] uppercase tracking-[0.3em] font-bold">
+                  {product.category} • {product.servingSize}
+                </p>
               </div>
               
               <p className="text-white/60 text-base font-light leading-relaxed italic max-w-sm">
@@ -124,7 +130,7 @@ export function ProductDetail({ product, onClose, onAddToCart, onNavigate }: Pro
             {/* Left: Price & Rating */}
             <div className="flex gap-16">
               <div className="space-y-1">
-                <span className="text-[7px] uppercase tracking-[0.4em] text-white/30 font-bold">Protocol Price</span>
+                <span className="text-[7px] uppercase tracking-[0.4em] text-white/30 font-bold">Signature Price</span>
                 <p className="font-headline text-3xl text-white">₹{product.price.toLocaleString()}</p>
               </div>
               <div className="space-y-1">

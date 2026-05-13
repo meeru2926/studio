@@ -1,4 +1,3 @@
-
 "use client";
 
 import { motion } from "framer-motion";
@@ -14,16 +13,16 @@ interface FeaturedCakesProps {
 
 export function FeaturedCakes({ onViewDetails, onAddToCart }: FeaturedCakesProps) {
   return (
-    <section id="cakes" className="py-32 px-6 md:px-12 bg-background relative border-t border-white/5">
+    <section id="cakes" className="py-24 px-6 md:px-12 bg-background relative border-t border-white/5">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-20 space-y-4">
-           <span className="text-primary uppercase tracking-[0.8em] text-[10px] font-bold block">The Editorial Collection</span>
-           <h2 className="font-headline text-5xl md:text-7xl text-white leading-none tracking-tighter">
+        <div className="mb-16 space-y-3">
+           <span className="text-primary uppercase tracking-[0.6em] text-[9px] font-bold block">The Editorial Collection</span>
+           <h2 className="font-headline text-4xl md:text-5xl text-white leading-none tracking-tighter">
             Commissions
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {CAKE_VARIANTS.map((cake, i) => (
             <motion.div
               key={cake.id}
@@ -47,22 +46,28 @@ export function FeaturedCakes({ onViewDetails, onAddToCart }: FeaturedCakesProps
                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-95 group-hover:scale-100">
                       <Button 
                         variant="secondary"
-                        className="rounded-none bg-white text-black text-[9px] font-bold uppercase tracking-widest px-6 py-4 h-auto"
+                        className="rounded-none bg-white text-black text-[8px] font-bold uppercase tracking-widest px-5 py-3 h-auto"
                       >
                         Explore
                       </Button>
                    </div>
                 </div>
                 
-                <CardContent className="px-0 py-6 space-y-4 flex-1 flex flex-col">
+                <CardContent className="px-0 py-5 space-y-3 flex-1 flex flex-col">
                   <div className="space-y-1">
                     <div className="flex justify-between items-baseline">
-                      <h3 className="font-headline text-lg text-white group-hover:text-primary transition-colors tracking-tight">{cake.name}</h3>
-                      <span className="text-primary text-[10px] font-bold tracking-widest font-headline">₹{cake.price.toLocaleString()}</span>
+                      <h3 className="font-headline text-base text-white group-hover:text-primary transition-colors tracking-tight">{cake.name}</h3>
+                      <span className="text-primary text-[9px] font-bold tracking-widest font-headline">₹{cake.price.toLocaleString()}</span>
                     </div>
-                    <p className="text-[8px] uppercase tracking-[0.3em] text-white/30 font-bold leading-relaxed">
-                      {cake.subtitle}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-[7px] uppercase tracking-[0.2em] text-white/30 font-bold">
+                        {cake.subtitle}
+                      </p>
+                      <span className="w-1 h-1 rounded-full bg-white/10" />
+                      <p className="text-[7px] uppercase tracking-[0.2em] text-primary/40 font-bold">
+                        {cake.servingSize}
+                      </p>
+                    </div>
                   </div>
 
                   <div className="flex items-center gap-1 opacity-20">
@@ -71,9 +76,9 @@ export function FeaturedCakes({ onViewDetails, onAddToCart }: FeaturedCakesProps
                     ))}
                   </div>
 
-                  <div className="pt-4 border-t border-white/5 mt-auto flex gap-2">
+                  <div className="pt-3 border-t border-white/5 mt-auto flex gap-2">
                     <Button 
-                      className="flex-1 rounded-none bg-white/5 text-white border border-white/10 text-[8px] uppercase tracking-[0.4em] font-bold hover:bg-white hover:text-black transition-all h-10"
+                      className="flex-1 rounded-none bg-white/5 text-white border border-white/10 text-[7px] uppercase tracking-[0.3em] font-bold hover:bg-white hover:text-black transition-all h-9"
                       onClick={() => onAddToCart(cake)}
                     >
                       Add to Selection
@@ -81,10 +86,10 @@ export function FeaturedCakes({ onViewDetails, onAddToCart }: FeaturedCakesProps
                     <Button 
                       variant="ghost" 
                       size="icon" 
-                      className="rounded-none border border-white/10 text-white/40 hover:text-white h-10 w-10"
+                      className="rounded-none border border-white/10 text-white/40 hover:text-white h-9 w-9"
                       onClick={() => onViewDetails(cake)}
                     >
-                      <ArrowUpRight size={14} />
+                      <ArrowUpRight size={12} />
                     </Button>
                   </div>
                 </CardContent>

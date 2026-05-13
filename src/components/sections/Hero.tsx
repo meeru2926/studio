@@ -41,7 +41,7 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
               className="w-full h-full object-contain pointer-events-none"
               alt={variant.name}
             />
-            {/* Soft dark overlays for text readability only - no sharp cuts */}
+            {/* Soft dark overlays for text readability only */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent pointer-events-none" />
             <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
           </motion.div>
@@ -52,7 +52,7 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
       <div className="relative z-10 w-full h-full max-w-[1440px] mx-auto px-8 md:px-20 flex flex-col justify-center">
         
         {/* Editorial Text Block */}
-        <div className="space-y-8 max-w-xl">
+        <div className="space-y-6 max-w-xl">
           <AnimatePresence mode="wait">
             <motion.div
               key={variant.id + "-info"}
@@ -64,23 +64,28 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
             >
               <div className="flex items-center gap-4">
                 <div className="h-[1px] w-8 bg-primary/40" />
-                <span className="text-[7px] uppercase tracking-[0.6em] font-bold text-primary">
-                  {variant.subtitle}
-                </span>
+                <div className="flex flex-col">
+                  <span className="text-[6px] uppercase tracking-[0.5em] font-bold text-primary">
+                    {variant.subtitle}
+                  </span>
+                  <span className="text-[5px] uppercase tracking-[0.3em] text-white/30 font-bold">
+                    {variant.category} • {variant.servingSize}
+                  </span>
+                </div>
               </div>
               
-              <h1 className="font-headline text-6xl md:text-8xl text-white tracking-tighter leading-[0.9] flex flex-col">
+              <h1 className="font-headline text-5xl md:text-7xl text-white tracking-tighter leading-[0.9] flex flex-col">
                 {variant.name.split(' ').map((word, i) => (
                   <span key={i}>{word}</span>
                 ))}
               </h1>
               
-              <p className="text-white/40 text-lg font-light italic leading-relaxed max-w-xs border-l border-primary/20 pl-6">
+              <p className="text-white/40 text-base font-light italic leading-relaxed max-w-xs border-l border-primary/20 pl-6">
                 {variant.description}
               </p>
 
-              <div className="flex items-baseline gap-4 pt-4">
-                <span className="text-[8px] uppercase tracking-[0.4em] text-white/20 font-bold">Commission</span>
+              <div className="flex items-baseline gap-4 pt-2">
+                <span className="text-[7px] uppercase tracking-[0.3em] text-white/20 font-bold">Signature Price</span>
                 <p className="font-headline text-3xl text-white">₹{variant.price.toLocaleString()}</p>
               </div>
             </motion.div>
@@ -96,31 +101,31 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
               variant="ghost" 
               size="icon" 
               onClick={prevFlavor} 
-              className="rounded-none border border-white/10 text-white hover:bg-white/10 h-12 w-12"
+              className="rounded-none border border-white/10 text-white hover:bg-white/10 h-10 w-10"
             >
-              <ChevronLeft size={16} />
+              <ChevronLeft size={14} />
             </Button>
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={nextFlavor} 
-              className="rounded-none border border-white/10 text-white hover:bg-white/10 h-12 w-12"
+              className="rounded-none border border-white/10 text-white hover:bg-white/10 h-10 w-10"
             >
-              <ChevronRight size={16} />
+              <ChevronRight size={14} />
             </Button>
           </div>
 
           {/* Ecommerce Actions */}
-          <div className="flex items-stretch gap-1 w-full md:w-auto h-14">
+          <div className="flex items-stretch gap-1 w-full md:w-auto h-12">
             <Button 
-              className="flex-1 md:flex-none px-12 rounded-none bg-white text-black font-bold uppercase tracking-[0.4em] text-[8px] hover:bg-white/90 transition-all shadow-2xl"
+              className="flex-1 md:flex-none px-10 rounded-none bg-white text-black font-bold uppercase tracking-[0.3em] text-[7px] hover:bg-white/90 transition-all shadow-2xl"
               onClick={() => onOrder(variant)}
             >
               <CreditCard size={10} className="mr-3" /> Buy Now
             </Button>
             <Button 
               variant="outline"
-              className="flex-1 md:flex-none px-12 rounded-none border-white/10 text-white bg-black/40 backdrop-blur-xl font-bold uppercase tracking-[0.4em] text-[8px] hover:bg-white hover:text-black transition-all"
+              className="flex-1 md:flex-none px-10 rounded-none border-white/10 text-white bg-black/40 backdrop-blur-xl font-bold uppercase tracking-[0.3em] text-[7px] hover:bg-white hover:text-black transition-all"
               onClick={() => onAddToCart(variant)}
             >
               <ShoppingBag size={10} className="mr-3" /> Add to Cart
