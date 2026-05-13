@@ -46,42 +46,42 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
          </AnimatePresence>
       </div>
 
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-10 h-full flex flex-col justify-between pt-48 pb-16">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-10 h-full flex flex-col justify-between pt-40 pb-20">
         <div className="flex items-center gap-6 overflow-hidden">
           <motion.div 
             initial={{ width: 0 }}
-            animate={{ width: 30 }}
+            animate={{ width: 24 }}
             className="h-[1px] bg-primary/40"
           />
-          <span className="text-[8px] uppercase tracking-[0.6em] font-bold text-primary/60">
+          <span className="text-[7px] uppercase tracking-[0.8em] font-bold text-primary/60">
             {variant.subtitle}
           </span>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-32 items-end">
-          <div className="space-y-10">
+          <div className="space-y-8">
             <AnimatePresence mode="wait">
               <motion.div
                 key={variant.id + "-text"}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
+                exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="space-y-6"
+                className="space-y-4"
               >
-                <h1 className="font-headline text-5xl md:text-6xl lg:text-7xl text-white tracking-tighter leading-[0.9]">
+                <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl text-white tracking-tighter leading-[0.95]">
                   {variant.name.split(' ').map((word, i) => (
                     <span key={i} className="block">{word}</span>
                   ))}
                 </h1>
                 
-                <p className="text-base md:text-lg text-white/40 leading-relaxed font-light max-w-xs italic border-l border-primary/20 pl-6">
+                <p className="text-sm md:text-base text-white/40 leading-relaxed font-light max-w-xs italic border-l border-primary/20 pl-6">
                   {variant.description}
                 </p>
 
-                <div className="flex items-baseline gap-4 pt-2">
-                  <span className="text-[8px] uppercase tracking-[0.4em] text-white/20 font-bold">Commission</span>
-                  <p className="font-headline text-3xl text-white">₹{variant.price.toLocaleString()}</p>
+                <div className="flex items-baseline gap-4 pt-4">
+                  <span className="text-[7px] uppercase tracking-[0.4em] text-white/20 font-bold">Commission</span>
+                  <p className="font-headline text-2xl text-white">₹{variant.price.toLocaleString()}</p>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -94,33 +94,33 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
               variant="ghost" 
               size="icon" 
               onClick={prevFlavor} 
-              className="rounded-none border border-white/10 text-white hover:bg-white/10 h-14 w-14"
+              className="rounded-none border border-white/10 text-white hover:bg-white/10 h-12 w-12"
             >
-              <ChevronLeft size={18} />
+              <ChevronLeft size={16} />
             </Button>
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={nextFlavor} 
-              className="rounded-none border border-white/10 text-white hover:bg-white/10 h-14 w-14"
+              className="rounded-none border border-white/10 text-white hover:bg-white/10 h-12 w-12"
             >
-              <ChevronRight size={18} />
+              <ChevronRight size={16} />
             </Button>
           </div>
 
-          <div className="flex items-stretch gap-1 w-full md:w-auto h-16">
+          <div className="flex items-stretch gap-1 w-full md:w-auto h-14">
             <Button 
-              className="flex-1 md:flex-none px-16 rounded-none bg-white text-black font-bold uppercase tracking-[0.4em] text-[9px] hover:bg-white/90 transition-all shadow-xl"
+              className="flex-1 md:flex-none px-12 rounded-none bg-white text-black font-bold uppercase tracking-[0.4em] text-[8px] hover:bg-white/90 transition-all"
               onClick={() => onOrder(variant)}
             >
-              <CreditCard size={12} className="mr-3" /> Buy Now
+              <CreditCard size={10} className="mr-3" /> Buy Now
             </Button>
             <Button 
               variant="outline"
-              className="flex-1 md:flex-none px-16 rounded-none border-white/20 text-white bg-black/40 backdrop-blur-md font-bold uppercase tracking-[0.4em] text-[9px] hover:bg-white hover:text-black transition-all"
+              className="flex-1 md:flex-none px-12 rounded-none border-white/20 text-white bg-black/40 backdrop-blur-md font-bold uppercase tracking-[0.4em] text-[8px] hover:bg-white hover:text-black transition-all"
               onClick={() => onAddToCart(variant)}
             >
-              <ShoppingBag size={12} className="mr-3" /> Add to Cart
+              <ShoppingBag size={10} className="mr-3" /> Add to Cart
             </Button>
           </div>
         </div>
