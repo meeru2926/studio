@@ -1,7 +1,8 @@
+
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Plus, Minus, ShoppingBag, ChevronLeft, ChevronRight, Search, Star } from "lucide-react";
+import { X, Plus, Minus, ShoppingBag, ChevronLeft, ChevronRight, Search, Star, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CakeVariant, CAKE_VARIANTS } from "@/lib/constants";
 import { useState, useEffect } from "react";
@@ -10,10 +11,11 @@ interface ProductDetailProps {
   product: CakeVariant | null;
   onClose: () => void;
   onAddToCart: (cake: CakeVariant, qty: number) => void;
+  onBuyNow?: (cake: CakeVariant, qty: number) => void;
   onNavigate?: (cake: CakeVariant) => void;
 }
 
-export function ProductDetail({ product, onClose, onAddToCart, onNavigate }: ProductDetailProps) {
+export function ProductDetail({ product, onClose, onAddToCart, onBuyNow, onNavigate }: ProductDetailProps) {
   const [qty, setQty] = useState(1);
 
   useEffect(() => {
@@ -101,9 +103,15 @@ export function ProductDetail({ product, onClose, onAddToCart, onNavigate }: Pro
                 <h2 className="font-headline text-5xl md:text-6xl text-white tracking-tighter leading-none max-w-md">
                   {product.name}
                 </h2>
-                <p className="text-primary/60 text-[9px] uppercase tracking-[0.3em] font-bold">
-                  {product.category} • {product.servingSize}
-                </p>
+                <div className="flex items-center gap-4">
+                  <p className="text-primary/60 text-[9px] uppercase tracking-[0.3em] font-bold">
+                    {product.category}
+                  </p>
+                  <span className="w-1 h-1 rounded-full bg-white/10" />
+                  <p className="text-white/40 text-[9px] uppercase tracking-[0.3em] font-bold">
+                    {product.servingSize}
+                  </p>
+                </div>
               </div>
               
               <p className="text-white/60 text-base font-light leading-relaxed italic max-w-sm">
@@ -153,17 +161,17 @@ export function ProductDetail({ product, onClose, onAddToCart, onNavigate }: Pro
 
               <Button 
                 variant="outline"
-                className="h-10 px-8 rounded-none border-primary/30 text-primary bg-transparent font-bold uppercase tracking-[0.4em] text-[7px] hover:bg-primary hover:text-primary-foreground transition-all"
+                className="h-10 px-8 rounded-none border-white/20 text-white bg-transparent font-bold uppercase tracking-[0.4em] text-[7px] hover:bg-white hover:text-black transition-all"
                 onClick={() => onAddToCart(product, qty)}
               >
-                Add to Cart
+                <ShoppingBag size={10} className="mr-2" /> Add to Cart
               </Button>
               
               <Button 
                 className="h-10 px-8 rounded-none bg-primary text-primary-foreground font-bold uppercase tracking-[0.4em] text-[7px] hover:scale-105 transition-transform"
-                onClick={() => onAddToCart(product, qty)}
+                onClick={() => onBuyNow?.(product, qty)}
               >
-                Buy Now
+                <CreditCard size={10} className="mr-2" /> Buy Now
               </Button>
             </div>
           </footer>

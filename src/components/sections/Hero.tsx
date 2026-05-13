@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useCallback } from "react";
@@ -68,9 +69,15 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
                   <span className="text-[6px] uppercase tracking-[0.5em] font-bold text-primary">
                     {variant.subtitle}
                   </span>
-                  <span className="text-[5px] uppercase tracking-[0.3em] text-white/30 font-bold">
-                    {variant.category} • {variant.servingSize}
-                  </span>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-[5px] uppercase tracking-[0.3em] text-white/30 font-bold">
+                      {variant.category}
+                    </span>
+                    <span className="w-0.5 h-0.5 rounded-full bg-white/10" />
+                    <span className="text-[5px] uppercase tracking-[0.3em] text-white/30 font-bold">
+                      {variant.servingSize}
+                    </span>
+                  </div>
                 </div>
               </div>
               

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -54,6 +55,21 @@ export default function Home() {
     setCart([]);
   };
 
+  const handleBuyNow = (cake: CakeVariant, quantity: number = 1) => {
+    // Add to cart and immediately open checkout drawer
+    setCart((prev) => {
+      const existing = prev.find((item) => item.cake.id === cake.id);
+      if (existing) {
+        return prev.map((item) =>
+          item.cake.id === cake.id ? { ...item, quantity: item.quantity + quantity } : item
+        );
+      }
+      return [...prev, { cake, quantity }];
+    });
+    setIsCartOpen(true);
+    // The CartDrawer handles the Razorpay initiation
+  };
+
   return (
     <main className="relative bg-background font-body min-h-screen text-foreground selection:bg-primary selection:text-primary-foreground">
       <AnimatePresence mode="wait">
@@ -73,7 +89,7 @@ export default function Home() {
           />
           
           <Hero 
-            onOrder={setSelectedProduct} 
+            onOrder={handleBuyNow} 
             onAddToCart={addToCart} 
           />
           
@@ -98,6 +114,7 @@ export default function Home() {
             product={selectedProduct} 
             onClose={() => setSelectedProduct(null)} 
             onAddToCart={addToCart} 
+            onBuyNow={handleBuyNow}
             onNavigate={setSelectedProduct}
           />
         </motion.div>

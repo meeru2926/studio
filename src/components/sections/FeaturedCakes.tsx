@@ -1,10 +1,11 @@
+
 "use client";
 
 import { motion } from "framer-motion";
 import { CAKE_VARIANTS, CakeVariant } from "@/lib/constants";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, Star } from "lucide-react";
+import { ArrowUpRight, Star, ShoppingBag } from "lucide-react";
 
 interface FeaturedCakesProps {
   onViewDetails: (cake: CakeVariant) => void;
@@ -47,6 +48,10 @@ export function FeaturedCakes({ onViewDetails, onAddToCart }: FeaturedCakesProps
                       <Button 
                         variant="secondary"
                         className="rounded-none bg-white text-black text-[8px] font-bold uppercase tracking-widest px-5 py-3 h-auto"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onViewDetails(cake);
+                        }}
                       >
                         Explore
                       </Button>
@@ -81,7 +86,7 @@ export function FeaturedCakes({ onViewDetails, onAddToCart }: FeaturedCakesProps
                       className="flex-1 rounded-none bg-white/5 text-white border border-white/10 text-[7px] uppercase tracking-[0.3em] font-bold hover:bg-white hover:text-black transition-all h-9"
                       onClick={() => onAddToCart(cake)}
                     >
-                      Add to Selection
+                      <ShoppingBag size={10} className="mr-2" /> Add to Selection
                     </Button>
                     <Button 
                       variant="ghost" 
