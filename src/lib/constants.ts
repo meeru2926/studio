@@ -26,7 +26,7 @@ export const CAKE_VARIANTS: CakeVariant[] = [
     themeColor: "#F6E7C8",
     mood: "Elegant, minimal, soft luxury",
     backgroundUrl: "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Vanilla.webp",
-    productUrl: "https://picsum.photos/seed/v-cake/800/1000",
+    productUrl: "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Vanilla%20Cake.jpeg",
     ingredients: ["Madagascar Vanilla", "Organic Cultured Butter", "White Cacao Shards", "Fleur de Sel"],
     accent: "hsl(35 40% 70%)"
   },
@@ -41,7 +41,7 @@ export const CAKE_VARIANTS: CakeVariant[] = [
     themeColor: "#FF8FB1",
     mood: "Bright, playful, premium",
     backgroundUrl: "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Strawberry.webp",
-    productUrl: "https://picsum.photos/seed/s-cake/800/1000",
+    productUrl: "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/strawberry%20cake.jpeg",
     ingredients: ["Wild Alpine Berries", "Botanical Cream", "Rosewater Essence", "Chiffon Sponge"],
     accent: "hsl(340 60% 75%)"
   },
@@ -56,7 +56,7 @@ export const CAKE_VARIANTS: CakeVariant[] = [
     themeColor: "#3B1F1A",
     mood: "Dark, cinematic, luxurious",
     backgroundUrl: "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Chocolate.webp",
-    productUrl: "https://picsum.photos/seed/c-cake/800/1000",
+    productUrl: "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/chocolate%20cake.jpeg",
     ingredients: ["75% Belgian Cacao", "Gold Leaf", "Maldon Sea Salt", "Espresso Reduction"],
     accent: "hsl(15 40% 30%)"
   },
@@ -71,7 +71,7 @@ export const CAKE_VARIANTS: CakeVariant[] = [
     themeColor: "#7A0019",
     mood: "Premium, dramatic, editorial",
     backgroundUrl: "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Blackforest.webp",
-    productUrl: "https://picsum.photos/seed/bf-cake/800/1000",
+    productUrl: "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Black%20Forest%20Cake.jpeg",
     ingredients: ["Kirsch Cherries", "Double Thick Cream", "Dark Cacao Shavings", "Forest Honey"],
     accent: "hsl(345 100% 20%)"
   }

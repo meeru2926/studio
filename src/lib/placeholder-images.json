@@ -3,25 +3,25 @@
     {
       "id": "vanilla-product",
       "description": "Vanilla Dream signature cake on a minimalist pedestal",
-      "imageUrl": "https://picsum.photos/seed/v-cake/800/1000",
+      "imageUrl": "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Vanilla%20Cake.jpeg",
       "imageHint": "luxury cake"
     },
     {
       "id": "strawberry-product",
       "description": "Strawberry Bliss cake with fresh berry textures",
-      "imageUrl": "https://picsum.photos/seed/s-cake/800/1000",
+      "imageUrl": "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/strawberry%20cake.jpeg",
       "imageHint": "strawberry dessert"
     },
     {
       "id": "chocolate-product",
       "description": "Chocolate Decadence glossy ganache cake",
-      "imageUrl": "https://picsum.photos/seed/c-cake/800/1000",
+      "imageUrl": "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/chocolate%20cake.jpeg",
       "imageHint": "chocolate cake"
     },
     {
       "id": "blackforest-product",
       "description": "Black Forest Royale editorial cake shot",
-      "imageUrl": "https://picsum.photos/seed/bf-cake/800/1000",
+      "imageUrl": "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Black%20Forest%20Cake.jpeg",
       "imageHint": "black forest"
     },
     {
