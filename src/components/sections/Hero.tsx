@@ -129,7 +129,7 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
               className="h-12 px-10 rounded-none border-white/20 text-white bg-black/40 backdrop-blur-xl font-bold uppercase tracking-[0.4em] text-[7px] hover:bg-white hover:text-black transition-all"
               onClick={() => onAddToCart(variant)}
             >
-              <ShoppingBag size={10} className="mr-3" /> Add to Selection
+              <ShoppingBag size={10} className="mr-3" /> Add to Cart
             </Button>
             <Button 
               className="h-12 px-10 rounded-none bg-primary text-primary-foreground font-bold uppercase tracking-[0.4em] text-[7px] hover:scale-105 transition-transform shadow-2xl"

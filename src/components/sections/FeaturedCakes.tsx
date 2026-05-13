@@ -16,9 +16,9 @@ export function FeaturedCakes({ onViewDetails, onAddToCart }: FeaturedCakesProps
   return (
     <section id="cakes" className="py-24 px-6 md:px-12 bg-background relative border-t border-white/5">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-16 space-y-3">
-           <span className="text-primary uppercase tracking-[0.6em] text-[9px] font-bold block">The Editorial Collection</span>
-           <h2 className="font-headline text-4xl md:text-5xl text-white leading-none tracking-tighter">
+        <div className="mb-12 space-y-2">
+           <span className="text-primary uppercase tracking-[0.6em] text-[8px] font-bold block">The Editorial Collection</span>
+           <h2 className="font-headline text-3xl md:text-4xl text-white leading-none tracking-tighter">
             Commissions
           </h2>
         </div>
@@ -86,7 +86,7 @@ export function FeaturedCakes({ onViewDetails, onAddToCart }: FeaturedCakesProps
                       className="flex-1 rounded-none bg-white/5 text-white border border-white/10 text-[7px] uppercase tracking-[0.3em] font-bold hover:bg-white hover:text-black transition-all h-9"
                       onClick={() => onAddToCart(cake)}
                     >
-                      <ShoppingBag size={10} className="mr-2" /> Add to Selection
+                      <ShoppingBag size={10} className="mr-2" /> Add to Cart
                     </Button>
                     <Button 
                       variant="ghost" 
