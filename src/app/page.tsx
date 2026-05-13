@@ -31,7 +31,12 @@ export default function Home() {
       </AnimatePresence>
 
       {!isLoading && (
-        <>
+        <motion.div 
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }} 
+          transition={{ duration: 1.5 }}
+          className="relative"
+        >
           <Navbar />
           <Hero />
           <FeaturedCakes />
@@ -40,8 +45,10 @@ export default function Home() {
           <Gallery />
           <FAQ />
           <Contact />
-        </>
+        </motion.div>
       )}
     </main>
   );
 }
+
+import { motion } from "framer-motion";
