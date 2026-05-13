@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -7,6 +6,8 @@ import { Navbar } from "@/components/ui/Navbar";
 import { LoadingScreen } from "@/components/ui/LoadingScreen";
 import { Hero } from "@/components/sections/Hero";
 import { FeaturedCakes } from "@/components/sections/FeaturedCakes";
+import { Gallery } from "@/components/sections/Gallery";
+import { Ingredients } from "@/components/sections/Ingredients";
 import { FlavorSommelier } from "@/components/sections/FlavorSommelier";
 import { FAQ } from "@/components/sections/FAQ";
 import { Contact } from "@/components/sections/Contact";
@@ -27,10 +28,13 @@ export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState<CakeVariant | null>(null);
 
   useEffect(() => {
+    // Robust scroll locking for both loader and product modal
     if (isLoading || selectedProduct) {
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     }
   }, [isLoading, selectedProduct]);
 
@@ -56,7 +60,6 @@ export default function Home() {
   };
 
   const handleBuyNow = (cake: CakeVariant, quantity: number = 1) => {
-    // Add to cart and immediately open checkout drawer
     setCart((prev) => {
       const existing = prev.find((item) => item.cake.id === cake.id);
       if (existing) {
@@ -67,20 +70,24 @@ export default function Home() {
       return [...prev, { cake, quantity }];
     });
     setIsCartOpen(true);
-    // The CartDrawer handles the Razorpay initiation
   };
 
   return (
     <main className="relative bg-background font-body min-h-screen text-foreground selection:bg-primary selection:text-primary-foreground">
       <AnimatePresence mode="wait">
-        {isLoading && <LoadingScreen key="loader" onComplete={() => setIsLoading(false)} />}
+        {isLoading && (
+          <LoadingScreen 
+            key="loader" 
+            onComplete={() => setIsLoading(false)} 
+          />
+        )}
       </AnimatePresence>
 
       {!isLoading && (
         <motion.div 
           initial={{ opacity: 0 }} 
           animate={{ opacity: 1 }} 
-          transition={{ duration: 1.5 }}
+          transition={{ duration: 1 }}
           className="relative"
         >
           <Navbar 
@@ -98,8 +105,14 @@ export default function Home() {
             onAddToCart={addToCart} 
           />
           
+          <Gallery />
+          
+          <Ingredients />
+          
           <FlavorSommelier />
+          
           <FAQ />
+          
           <Contact />
 
           <CartDrawer 
