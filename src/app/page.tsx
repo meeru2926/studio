@@ -1,20 +1,28 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/ui/Navbar";
 import { LoadingScreen } from "@/components/ui/LoadingScreen";
 import { Hero } from "@/components/sections/Hero";
 import { FeaturedCakes } from "@/components/sections/FeaturedCakes";
-import { Ingredients } from "@/components/sections/Ingredients";
 import { FlavorSommelier } from "@/components/sections/FlavorSommelier";
-import { Gallery } from "@/components/sections/Gallery";
 import { FAQ } from "@/components/sections/FAQ";
 import { Contact } from "@/components/sections/Contact";
+import { CartDrawer } from "@/components/ui/CartDrawer";
+import { ProductDetail } from "@/components/ui/ProductDetail";
+import { CakeVariant } from "@/lib/constants";
+
+export type CartItem = {
+  cake: CakeVariant;
+  quantity: number;
+};
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<CakeVariant | null>(null);
 
   useEffect(() => {
     if (isLoading) {
@@ -24,8 +32,25 @@ export default function Home() {
     }
   }, [isLoading]);
 
+  const addToCart = (cake: CakeVariant, quantity: number = 1) => {
+    setCart((prev) => {
+      const existing = prev.find((item) => item.cake.id === cake.id);
+      if (existing) {
+        return prev.map((item) =>
+          item.cake.id === cake.id ? { ...item, quantity: item.quantity + quantity } : item
+        );
+      }
+      return [...prev, { cake, quantity }];
+    });
+    setIsCartOpen(true);
+  };
+
+  const removeFromCart = (id: string) => {
+    setCart((prev) => prev.filter((item) => item.cake.id !== id));
+  };
+
   return (
-    <main className="relative bg-background font-body min-h-screen">
+    <main className="relative bg-background font-body min-h-screen text-foreground selection:bg-primary selection:text-primary-foreground">
       <AnimatePresence mode="wait">
         {isLoading && <LoadingScreen key="loader" onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
@@ -37,18 +62,36 @@ export default function Home() {
           transition={{ duration: 1.5 }}
           className="relative"
         >
-          <Navbar />
-          <Hero />
-          <FeaturedCakes />
-          <Ingredients />
+          <Navbar 
+            cartCount={cart.reduce((acc, item) => acc + item.quantity, 0)} 
+            onOpenCart={() => setIsCartOpen(true)} 
+          />
+          
+          <Hero onOrder={setSelectedProduct} />
+          
+          <FeaturedCakes 
+            onViewDetails={setSelectedProduct} 
+            onAddToCart={addToCart} 
+          />
+          
           <FlavorSommelier />
-          <Gallery />
           <FAQ />
           <Contact />
+
+          <CartDrawer 
+            isOpen={isCartOpen} 
+            onClose={() => setIsCartOpen(false)} 
+            items={cart} 
+            onRemove={removeFromCart} 
+          />
+
+          <ProductDetail 
+            product={selectedProduct} 
+            onClose={() => setSelectedProduct(null)} 
+            onAddToCart={addToCart} 
+          />
         </motion.div>
       )}
     </main>
   );
 }
-
-import { motion } from "framer-motion";

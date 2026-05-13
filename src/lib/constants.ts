@@ -3,11 +3,14 @@ export type CakeVariant = {
   name: string;
   subtitle: string;
   description: string;
+  longDescription: string;
+  price: number;
+  rating: number;
   themeColor: string;
   mood: string;
   backgroundUrl: string;
+  productUrl: string;
   ingredients: string[];
-  transitionStyle: string;
   accent: string;
 };
 
@@ -15,49 +18,61 @@ export const CAKE_VARIANTS: CakeVariant[] = [
   {
     id: "vanilla-dream",
     name: "Vanilla Dream",
-    subtitle: "Luxury Vanilla Cake",
-    description: "A soft handcrafted vanilla sponge layered with silky buttercream and finished with premium white chocolate textures.",
+    subtitle: "Pure Madagascar Heritage",
+    description: "A soft handcrafted vanilla sponge layered with silky buttercream.",
+    longDescription: "Our signature Vanilla Dream is an architectural feat of lightness. We use double-cured Madagascar vanilla beans infused into a 48-hour matured sponge, layered with velvet-texture buttercream and finished with crystalline white chocolate shards.",
+    price: 125,
+    rating: 4.9,
     themeColor: "#F6E7C8",
     mood: "Elegant, minimal, soft luxury",
     backgroundUrl: "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Vanilla.webp",
-    ingredients: ["Vanilla cream ribbons", "White chocolate flakes", "Powdered sugar", "Floating cherries"],
-    transitionStyle: "Smooth cream-wave motion with soft golden lighting",
+    productUrl: "https://picsum.photos/seed/v-cake/800/1000",
+    ingredients: ["Madagascar Vanilla", "Organic Cultured Butter", "White Cacao Shards", "Fleur de Sel"],
     accent: "hsl(35 40% 70%)"
   },
   {
     id: "strawberry-bliss",
     name: "Strawberry Bliss",
-    subtitle: "Fresh Berry Cake",
-    description: "Fresh strawberry cream cake layered with juicy berries, whipped frosting, and vibrant fruit textures.",
+    subtitle: "Wild Botanical Infusion",
+    description: "Fresh strawberry cream cake with vibrant fruit textures.",
+    longDescription: "A celebration of seasonal vibrance. This creation features wild alpine strawberry reduction, hand-whipped botanical cream, and a chiffon base that dissolves on the palate. Each layer is punctuated by macerated berries for a bright, cinematic flavor profile.",
+    price: 135,
+    rating: 4.8,
     themeColor: "#FF8FB1",
     mood: "Bright, playful, premium",
     backgroundUrl: "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Strawberry.webp",
-    ingredients: ["Floating strawberries", "Strawberry syrup splashes", "Cream ribbons", "Berry droplets"],
-    transitionStyle: "Dynamic berry splash motion with bright cinematic highlights",
+    productUrl: "https://picsum.photos/seed/s-cake/800/1000",
+    ingredients: ["Wild Alpine Berries", "Botanical Cream", "Rosewater Essence", "Chiffon Sponge"],
     accent: "hsl(340 60% 75%)"
   },
   {
     id: "chocolate-decadence",
     name: "Chocolate Decadence",
-    subtitle: "Belgian Chocolate Cake",
-    description: "Rich Belgian chocolate sponge coated with glossy ganache and deep cocoa textures for an indulgent premium dessert experience.",
+    subtitle: "Midnight Belgian Ganache",
+    description: "Rich Belgian chocolate sponge coated with glossy dark ganache.",
+    longDescription: "Dark, cinematic, and unapologetically rich. We utilize 75% single-origin Belgian cacao to create a dense yet moist crumb, enrobed in a mirror-glaze ganache. Accented with gold leaf and sea salt for a deep, luxurious dessert experience.",
+    price: 145,
+    rating: 5.0,
     themeColor: "#3B1F1A",
     mood: "Dark, cinematic, luxurious",
     backgroundUrl: "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Chocolate.webp",
-    ingredients: ["Molten chocolate splashes", "Cocoa dust", "Chocolate shards", "Ganache drips"],
-    transitionStyle: "Violent molten chocolate wave motion with dramatic cinematic shadows",
+    productUrl: "https://picsum.photos/seed/c-cake/800/1000",
+    ingredients: ["75% Belgian Cacao", "Gold Leaf", "Maldon Sea Salt", "Espresso Reduction"],
     accent: "hsl(15 40% 30%)"
   },
   {
     id: "black-forest-royale",
     name: "Black Forest Royale",
-    subtitle: "Cherry Chocolate Cake",
-    description: "A dramatic Black Forest masterpiece layered with rich chocolate cream, premium cherries, and elegant whipped textures.",
+    subtitle: "Editorial Cherry Commission",
+    description: "A dramatic masterpiece layered with rich cherry and chocolate.",
+    longDescription: "An editorial interpretation of a classic. Our Royale version features Kirsch-soaked cherries from the Black Forest region, layered between dark cocoa sponge and airy whipped double cream. It is the centerpiece of our architectural collection.",
+    price: 155,
+    rating: 4.9,
     themeColor: "#7A0019",
     mood: "Premium, dramatic, editorial",
     backgroundUrl: "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Blackforest.webp",
-    ingredients: ["Floating cherries", "Chocolate curls", "Cream swirls", "Cocoa powder mist"],
-    transitionStyle: "Elegant cherry explosion motion with cinematic luxury lighting",
+    productUrl: "https://picsum.photos/seed/bf-cake/800/1000",
+    ingredients: ["Kirsch Cherries", "Double Thick Cream", "Dark Cacao Shavings", "Forest Honey"],
     accent: "hsl(345 100% 20%)"
   }
 ];
