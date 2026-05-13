@@ -65,7 +65,7 @@ export function ProductDetail({ product, onClose, onAddToCart, onBuyNow, onNavig
           <header className="flex justify-between items-center mb-8">
             <div className="flex flex-col">
               <span className="font-headline text-xl tracking-tighter font-bold uppercase text-primary">CakeStory</span>
-              <span className="text-[6px] uppercase tracking-[0.4em] text-white/40 font-bold -mt-1">Luxury Boutique</span>
+              <span className="text-[6px] uppercase tracking-[0.4em] text-white/40 font-bold -mt-1">Your Delicious Choice!</span>
             </div>
 
             <div className="flex items-center gap-6 text-white/40">
