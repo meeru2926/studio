@@ -3,25 +3,28 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, ShoppingBag, CreditCard } from "lucide-react";
+import { ChevronLeft, ChevronRight, ShoppingBag, CreditCard, Minus, Plus } from "lucide-react";
 import { CAKE_VARIANTS, CakeVariant } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 
 interface HeroProps {
-  onOrder: (cake: CakeVariant) => void;
-  onAddToCart: (cake: CakeVariant) => void;
+  onOrder: (cake: CakeVariant, qty: number) => void;
+  onAddToCart: (cake: CakeVariant, qty: number) => void;
 }
 
 export function Hero({ onOrder, onAddToCart }: HeroProps) {
   const [currentIdx, setCurrentIdx] = useState(0);
+  const [qty, setQty] = useState(1);
   const variant = CAKE_VARIANTS[currentIdx];
 
   const nextFlavor = () => {
     setCurrentIdx((prev) => (prev + 1) % CAKE_VARIANTS.length);
+    setQty(1);
   };
 
   const prevFlavor = () => {
     setCurrentIdx((prev) => (prev - 1 + CAKE_VARIANTS.length) % CAKE_VARIANTS.length);
+    setQty(1);
   };
 
   return (
@@ -133,19 +136,37 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
           </div>
 
           {/* Right: Ecommerce Actions */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            {/* Quantity Selector */}
+            <div className="flex items-center justify-between gap-6 px-6 h-16 bg-white/5 border border-white/10 min-w-[140px]">
+              <button 
+                className="text-white/20 hover:text-white transition-colors" 
+                onClick={() => setQty(Math.max(1, qty - 1))}
+              >
+                <Minus size={14} />
+              </button>
+              <span className="text-sm font-bold font-headline text-white tabular-nums">{qty}</span>
+              <button 
+                className="text-white/20 hover:text-white transition-colors" 
+                onClick={() => setQty(qty + 1)}
+              >
+                <Plus size={14} />
+              </button>
+            </div>
+
             <Button 
               variant="outline"
-              className="h-14 px-12 rounded-none border-white/10 text-white bg-black/40 backdrop-blur-3xl font-bold uppercase tracking-[0.4em] text-[8px] hover:bg-white hover:text-black transition-all"
-              onClick={() => onAddToCart(variant)}
+              className="h-16 px-10 rounded-none border-white/10 text-white bg-black/40 backdrop-blur-3xl font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-white hover:text-black transition-all"
+              onClick={() => onAddToCart(variant, qty)}
             >
-              <ShoppingBag size={12} className="mr-4" /> Add to Cart
+              <ShoppingBag size={14} className="mr-3" /> Add to Cart
             </Button>
+            
             <Button 
-              className="h-14 px-12 rounded-none bg-primary text-primary-foreground font-bold uppercase tracking-[0.4em] text-[8px] hover:scale-105 transition-transform shadow-[0_0_50px_-12px_rgba(177,145,89,0.3)]"
-              onClick={() => onOrder(variant)}
+              className="h-16 px-10 rounded-none bg-primary text-primary-foreground font-bold uppercase tracking-[0.2em] text-[10px] hover:scale-105 transition-transform shadow-[0_0_50px_-12px_rgba(177,145,89,0.3)]"
+              onClick={() => onOrder(variant, qty)}
             >
-              <CreditCard size={12} className="mr-4" /> Buy Now
+              <CreditCard size={14} className="mr-3" /> Buy Now
             </Button>
           </div>
 
