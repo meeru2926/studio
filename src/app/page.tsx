@@ -26,12 +26,12 @@ export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState<CakeVariant | null>(null);
 
   useEffect(() => {
-    if (isLoading) {
+    if (isLoading || selectedProduct) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
     }
-  }, [isLoading]);
+  }, [isLoading, selectedProduct]);
 
   const addToCart = (cake: CakeVariant, quantity: number = 1) => {
     setCart((prev) => {
@@ -93,6 +93,7 @@ export default function Home() {
             product={selectedProduct} 
             onClose={() => setSelectedProduct(null)} 
             onAddToCart={addToCart} 
+            onNavigate={setSelectedProduct}
           />
         </motion.div>
       )}
