@@ -43,8 +43,8 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
               alt={variant.name}
             />
             {/* Soft dark overlays for text readability only */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/90 to-transparent pointer-events-none" />
           </motion.div>
         </AnimatePresence>
       </div>
@@ -87,7 +87,7 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
                 ))}
               </h1>
               
-              <p className="text-white/40 text-base font-light italic leading-relaxed max-w-xs border-l border-primary/20 pl-6">
+              <p className="text-white/40 text-sm font-light italic leading-relaxed max-w-xs border-l border-primary/20 pl-6">
                 {variant.description}
               </p>
 
@@ -100,9 +100,9 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
         </div>
 
         {/* Action Controls & Navigation Footer */}
-        <div className="absolute bottom-12 left-8 md:left-20 right-8 md:right-20 flex flex-col md:flex-row items-end justify-between gap-12">
+        <div className="absolute bottom-12 left-8 md:left-20 right-8 md:right-20 flex items-end justify-between">
           
-          {/* Flavor Selection Navigation */}
+          {/* Left: Flavor Selection Navigation */}
           <div className="flex gap-1">
             <Button 
               variant="ghost" 
@@ -122,20 +122,20 @@ export function Hero({ onOrder, onAddToCart }: HeroProps) {
             </Button>
           </div>
 
-          {/* Ecommerce Actions */}
-          <div className="flex items-stretch gap-1 w-full md:w-auto h-12">
+          {/* Right: Ecommerce Actions */}
+          <div className="flex items-center gap-2">
             <Button 
-              className="flex-1 md:flex-none px-10 rounded-none bg-white text-black font-bold uppercase tracking-[0.3em] text-[7px] hover:bg-white/90 transition-all shadow-2xl"
+              variant="outline"
+              className="h-12 px-10 rounded-none border-white/20 text-white bg-black/40 backdrop-blur-xl font-bold uppercase tracking-[0.4em] text-[7px] hover:bg-white hover:text-black transition-all"
+              onClick={() => onAddToCart(variant)}
+            >
+              <ShoppingBag size={10} className="mr-3" /> Add to Selection
+            </Button>
+            <Button 
+              className="h-12 px-10 rounded-none bg-primary text-primary-foreground font-bold uppercase tracking-[0.4em] text-[7px] hover:scale-105 transition-transform shadow-2xl"
               onClick={() => onOrder(variant)}
             >
               <CreditCard size={10} className="mr-3" /> Buy Now
-            </Button>
-            <Button 
-              variant="outline"
-              className="flex-1 md:flex-none px-10 rounded-none border-white/10 text-white bg-black/40 backdrop-blur-xl font-bold uppercase tracking-[0.3em] text-[7px] hover:bg-white hover:text-black transition-all"
-              onClick={() => onAddToCart(variant)}
-            >
-              <ShoppingBag size={10} className="mr-3" /> Add to Cart
             </Button>
           </div>
 

@@ -52,7 +52,7 @@ export function ProductDetail({ product, onClose, onAddToCart, onBuyNow, onNavig
                 className="w-full h-full object-contain"
                 alt={product.name}
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/40" />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40" />
             </motion.div>
           </AnimatePresence>
@@ -68,18 +68,9 @@ export function ProductDetail({ product, onClose, onAddToCart, onBuyNow, onNavig
               <span className="text-[6px] uppercase tracking-[0.4em] text-white/40 font-bold -mt-1">Luxury Boutique</span>
             </div>
 
-            <nav className="hidden lg:flex items-center gap-8 text-[8px] uppercase tracking-[0.4em] font-bold text-white/40">
-              <a href="#" className="hover:text-primary transition-colors">Home</a>
-              <a href="#" className="hover:text-primary transition-colors text-white">Cakes</a>
-              <a href="#" className="hover:text-primary transition-colors">Ingredients</a>
-              <a href="#" className="hover:text-primary transition-colors">Contact</a>
-            </nav>
-
-            <div className="flex items-center gap-4 text-white/40">
+            <div className="flex items-center gap-6 text-white/40">
               <Search size={16} className="cursor-pointer hover:text-white transition-colors" />
-              <div className="relative cursor-pointer hover:text-white transition-colors">
-                <ShoppingBag size={16} />
-              </div>
+              <ShoppingBag size={16} className="cursor-pointer hover:text-white transition-colors" />
               <X size={18} className="cursor-pointer hover:text-white transition-colors ml-4" onClick={onClose} />
             </div>
           </header>
@@ -98,9 +89,9 @@ export function ProductDetail({ product, onClose, onAddToCart, onBuyNow, onNavig
                     {product.subtitle}
                   </span>
                   <div className="h-[1px] w-6 bg-primary/20" />
-                  <span className="text-white/40 text-[7px] uppercase tracking-[0.4em] font-bold">{product.tagline}</span>
+                  <span className="text-white/40 text-[7px] uppercase tracking-[0.4em] font-bold">Freshly Crafted</span>
                 </div>
-                <h2 className="font-headline text-5xl md:text-6xl text-white tracking-tighter leading-none max-w-md">
+                <h2 className="font-headline text-5xl md:text-7xl text-white tracking-tighter leading-none max-w-md">
                   {product.name}
                 </h2>
                 <div className="flex items-center gap-4">
@@ -117,89 +108,91 @@ export function ProductDetail({ product, onClose, onAddToCart, onBuyNow, onNavig
               <p className="text-white/60 text-base font-light leading-relaxed italic max-w-sm">
                 {product.longDescription}
               </p>
+            </motion.div>
+          </div>
 
-              <div className="space-y-3 pt-4">
+          {/* Bottom Area: Composition (Left) & Actions (Right) */}
+          <div className="mt-auto grid grid-cols-1 md:grid-cols-2 items-end gap-12 border-t border-white/5 pt-8">
+            
+            {/* Left Side: Composition */}
+            <div className="space-y-6">
+              <div className="space-y-3">
                 <span className="text-primary text-[8px] uppercase tracking-[0.5em] font-bold block">Composition</span>
-                <div className="grid grid-cols-2 gap-x-8 gap-y-2">
+                <div className="grid grid-cols-2 gap-x-12 gap-y-2">
                   {product.ingredients.map(ing => (
-                    <div key={ing} className="flex items-center gap-2">
+                    <div key={ing} className="flex items-center gap-3">
                       <div className="w-1 h-1 rounded-full bg-primary/40" />
-                      <span className="text-[8px] text-white/50 tracking-widest uppercase font-bold">{ing}</span>
+                      <span className="text-[8px] text-white/50 tracking-[0.2em] uppercase font-bold">{ing}</span>
                     </div>
                   ))}
                 </div>
               </div>
-            </motion.div>
-          </div>
-
-          {/* Bottom Interaction Area */}
-          <footer className="mt-auto pt-8 grid grid-cols-1 md:grid-cols-2 items-end gap-8">
-            
-            {/* Left: Price & Rating */}
-            <div className="flex gap-16">
-              <div className="space-y-1">
-                <span className="text-[7px] uppercase tracking-[0.4em] text-white/30 font-bold">Signature Price</span>
-                <p className="font-headline text-3xl text-white">₹{product.price.toLocaleString()}</p>
+              <div className="flex gap-12">
+                 <div className="space-y-1">
+                    <span className="text-[7px] uppercase tracking-[0.4em] text-white/30 font-bold">Appraisal</span>
+                    <div className="flex items-center gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} size={10} className={i < 4 ? "text-primary fill-primary" : "text-white/20"} />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-[7px] uppercase tracking-[0.4em] text-white/30 font-bold">Price</span>
+                    <p className="font-headline text-2xl text-white">₹{product.price.toLocaleString()}</p>
+                  </div>
               </div>
-              <div className="space-y-1">
-                <span className="text-[7px] uppercase tracking-[0.4em] text-white/30 font-bold">Appraisal</span>
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={10} className={i < 4 ? "text-primary fill-primary" : "text-white/20"} />
+            </div>
+
+            {/* Right Side: Ecommerce Controls */}
+            <div className="flex flex-col items-end gap-4">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-5 px-5 h-12 bg-white/5 border border-white/10">
+                  <button className="text-white/20 hover:text-white" onClick={() => setQty(Math.max(1, qty - 1))}><Minus size={10} /></button>
+                  <span className="text-xs font-bold font-headline w-3 text-center text-white">{qty}</span>
+                  <button className="text-white/20 hover:text-white" onClick={() => setQty(qty + 1)}><Plus size={10} /></button>
+                </div>
+
+                <Button 
+                  variant="outline"
+                  className="h-12 px-10 rounded-none border-white/20 text-white bg-transparent font-bold uppercase tracking-[0.4em] text-[7px] hover:bg-white hover:text-black transition-all"
+                  onClick={() => onAddToCart(product, qty)}
+                >
+                  <ShoppingBag size={10} className="mr-3" /> Add to Cart
+                </Button>
+                
+                <Button 
+                  className="h-12 px-10 rounded-none bg-primary text-primary-foreground font-bold uppercase tracking-[0.4em] text-[7px] hover:scale-105 transition-transform"
+                  onClick={() => onBuyNow?.(product, qty)}
+                >
+                  <CreditCard size={10} className="mr-3" /> Buy Now
+                </Button>
+              </div>
+
+              {/* Navigation within Detail */}
+              <div className="flex items-center gap-8 pt-4">
+                <button 
+                  onClick={() => onNavigate?.(prevProduct)} 
+                  className="text-[8px] text-white/40 hover:text-white transition-colors uppercase tracking-[0.5em] flex items-center gap-3 font-bold"
+                >
+                  <ChevronLeft size={12} /> Prev
+                </button>
+                <div className="flex gap-2">
+                  {CAKE_VARIANTS.map((_, i) => (
+                    <div 
+                      key={i} 
+                      className={`h-1 w-1 rounded-full ${i === currentIndex ? 'bg-primary' : 'bg-white/10'}`} 
+                    />
                   ))}
                 </div>
+                <button 
+                  onClick={() => onNavigate?.(nextProduct)} 
+                  className="text-[8px] text-white/40 hover:text-white transition-colors uppercase tracking-[0.5em] flex items-center gap-3 font-bold"
+                >
+                  Next <ChevronRight size={12} />
+                </button>
               </div>
             </div>
 
-            {/* Right: Actions */}
-            <div className="flex flex-wrap items-center justify-end gap-3">
-              <div className="flex items-center gap-5 px-5 h-10 bg-white/5 border border-white/10">
-                <button className="text-white/20 hover:text-white" onClick={() => setQty(Math.max(1, qty - 1))}><Minus size={10} /></button>
-                <span className="text-xs font-bold font-headline w-3 text-center text-white">{qty}</span>
-                <button className="text-white/20 hover:text-white" onClick={() => setQty(qty + 1)}><Plus size={10} /></button>
-              </div>
-
-              <Button 
-                variant="outline"
-                className="h-10 px-8 rounded-none border-white/20 text-white bg-transparent font-bold uppercase tracking-[0.4em] text-[7px] hover:bg-white hover:text-black transition-all"
-                onClick={() => onAddToCart(product, qty)}
-              >
-                <ShoppingBag size={10} className="mr-2" /> Add to Cart
-              </Button>
-              
-              <Button 
-                className="h-10 px-8 rounded-none bg-primary text-primary-foreground font-bold uppercase tracking-[0.4em] text-[7px] hover:scale-105 transition-transform"
-                onClick={() => onBuyNow?.(product, qty)}
-              >
-                <CreditCard size={10} className="mr-2" /> Buy Now
-              </Button>
-            </div>
-          </footer>
-
-          {/* Bottom Navigation Indicators */}
-          <div className="flex justify-between items-center mt-8 pt-6 border-t border-white/5">
-             <button 
-              onClick={() => onNavigate?.(prevProduct)} 
-              className="text-[8px] text-white/40 hover:text-white transition-colors uppercase tracking-[0.5em] flex items-center gap-3 font-bold"
-            >
-              <ChevronLeft size={12} /> Prev
-            </button>
-            
-            <div className="flex gap-3">
-              {CAKE_VARIANTS.map((_, i) => (
-                <div 
-                  key={i} 
-                  className={`h-1 w-1 rounded-full ${i === currentIndex ? 'bg-primary' : 'bg-white/10'}`} 
-                />
-              ))}
-            </div>
-
-            <button 
-              onClick={() => onNavigate?.(nextProduct)} 
-              className="text-[8px] text-white/40 hover:text-white transition-colors uppercase tracking-[0.5em] flex items-center gap-3 font-bold"
-            >
-              Next <ChevronRight size={12} />
-            </button>
           </div>
 
         </div>
