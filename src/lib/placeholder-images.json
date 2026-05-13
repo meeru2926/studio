@@ -2,87 +2,63 @@
   "placeholderImages": [
     {
       "id": "vanilla-product",
-      "description": "Vanilla Dream signature cake on a minimalist pedestal",
+      "description": "Vanilla Dream signature cake - Pure Madagascar Heritage",
       "imageUrl": "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Vanilla%20Cake.jpeg",
       "imageHint": "luxury cake"
     },
     {
       "id": "strawberry-product",
-      "description": "Strawberry Bliss cake with fresh berry textures",
+      "description": "Strawberry Bliss cake - Wild Botanical Infusion",
       "imageUrl": "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/strawberry%20cake.jpeg",
       "imageHint": "strawberry dessert"
     },
     {
       "id": "chocolate-product",
-      "description": "Chocolate Decadence glossy ganache cake",
+      "description": "Chocolate Decadence cake - Midnight Belgian Ganache",
       "imageUrl": "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/chocolate%20cake.jpeg",
       "imageHint": "chocolate cake"
     },
     {
       "id": "blackforest-product",
-      "description": "Black Forest Royale editorial cake shot",
+      "description": "Black Forest Royale - Editorial Cherry Commission",
       "imageUrl": "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Black%20Forest%20Cake.jpeg",
       "imageHint": "black forest"
     },
     {
-      "id": "ingredient-vanilla",
-      "description": "Macro shot of Madagascar vanilla beans",
-      "imageUrl": "https://picsum.photos/seed/macro-v/600/600",
-      "imageHint": "vanilla pods"
-    },
-    {
-      "id": "ingredient-cocoa",
-      "description": "Macro shot of Belgian cocoa shards",
-      "imageUrl": "https://picsum.photos/seed/macro-c/600/600",
-      "imageHint": "cocoa chocolate"
-    },
-    {
-      "id": "ingredient-berry",
-      "description": "Macro shot of wild forest berries",
-      "imageUrl": "https://picsum.photos/seed/macro-b/600/600",
-      "imageHint": "wild berries"
-    },
-    {
-      "id": "ingredient-cream",
-      "description": "Silky organic cream swirl",
-      "imageUrl": "https://picsum.photos/seed/macro-cr/600/600",
-      "imageHint": "whipped cream"
-    },
-    {
       "id": "gallery-1",
-      "description": "CakeStory masterpiece large",
-      "imageUrl": "https://picsum.photos/seed/gal-1/800/800",
-      "imageHint": "luxury cake"
+      "description": "Vanilla Dream Animation Close-up",
+      "imageUrl": "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Vanilla.webp",
+      "imageHint": "cake animation"
     },
     {
       "id": "gallery-2",
-      "description": "Dessert pastry close-up",
-      "imageUrl": "https://picsum.photos/seed/gal-2/800/800",
-      "imageHint": "pastry dessert"
+      "description": "Strawberry Bliss Animation Close-up",
+      "imageUrl": "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Strawberry.webp",
+      "imageHint": "berry dessert"
     },
     {
       "id": "gallery-3",
-      "description": "Cake slice on artisanal plate",
-      "imageUrl": "https://picsum.photos/seed/gal-3/800/800",
-      "imageHint": "cake slice"
+      "description": "Chocolate Decadence Animation Close-up",
+      "imageUrl": "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Chocolate.webp",
+      "imageHint": "chocolate animation"
     },
     {
       "id": "gallery-4",
-      "description": "Luxury bakery display",
-      "imageUrl": "https://picsum.photos/seed/gal-4/800/800",
-      "imageHint": "bakery display"
+      "description": "Black Forest Royale Animation Close-up",
+      "imageUrl": "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Blackforest.webp",
+      "imageHint": "cherry cake"
     },
     {
-      "id": "gallery-5",
-      "description": "Celebration event cake centerpiece",
-      "imageUrl": "https://picsum.photos/seed/gal-5/800/800",
-      "imageHint": "celebration cake"
+      "id": "ingredient-vanilla",
+      "description": "Macro shot of Madagascar vanilla heritage",
+      "imageUrl": "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Vanilla%20Cake.jpeg",
+      "imageHint": "vanilla beans"
     },
     {
-      "id": "cta-bg",
-      "description": "Luxury bakery interior at night",
-      "imageUrl": "https://picsum.photos/seed/bakery-night/1920/1080",
-      "imageHint": "luxury bakery"
+      "id": "ingredient-cocoa",
+      "description": "Midnight Belgian Ganache textures",
+      "imageUrl": "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/chocolate%20cake.jpeg",
+      "imageHint": "cocoa shards"
     }
   ]
 }

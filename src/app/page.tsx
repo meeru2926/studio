@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -67,7 +68,10 @@ export default function Home() {
             onOpenCart={() => setIsCartOpen(true)} 
           />
           
-          <Hero onOrder={setSelectedProduct} />
+          <Hero 
+            onOrder={setSelectedProduct} 
+            onAddToCart={addToCart} 
+          />
           
           <FeaturedCakes 
             onViewDetails={setSelectedProduct} 
