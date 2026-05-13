@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -6,8 +7,6 @@ import { Navbar } from "@/components/ui/Navbar";
 import { LoadingScreen } from "@/components/ui/LoadingScreen";
 import { Hero } from "@/components/sections/Hero";
 import { FeaturedCakes } from "@/components/sections/FeaturedCakes";
-import { Gallery } from "@/components/sections/Gallery";
-import { Ingredients } from "@/components/sections/Ingredients";
 import { FlavorSommelier } from "@/components/sections/FlavorSommelier";
 import { FAQ } from "@/components/sections/FAQ";
 import { Contact } from "@/components/sections/Contact";
@@ -28,14 +27,17 @@ export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState<CakeVariant | null>(null);
 
   useEffect(() => {
-    // Robust scroll locking for both loader and product modal
+    // Robust scroll locking/unlocking
     if (isLoading || selectedProduct) {
       document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "auto";
     }
+    
+    // Cleanup to ensure scroll is restored if component unmounts
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [isLoading, selectedProduct]);
 
   const addToCart = (cake: CakeVariant, quantity: number = 1) => {
@@ -104,10 +106,6 @@ export default function Home() {
             onViewDetails={setSelectedProduct} 
             onAddToCart={addToCart} 
           />
-          
-          <Gallery />
-          
-          <Ingredients />
           
           <FlavorSommelier />
           
