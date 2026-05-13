@@ -3,8 +3,9 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Trash2, ShoppingBag } from "lucide-react";
+import { Trash2, ShoppingBag, Loader2 } from "lucide-react";
 import { CartItem } from "@/app/page";
+import { useState, useEffect } from "react";
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -14,7 +15,61 @@ interface CartDrawerProps {
 }
 
 export function CartDrawer({ isOpen, onClose, items, onRemove }: CartDrawerProps) {
+  const [isProcessing, setIsProcessing] = useState(false);
   const total = items.reduce((acc, item) => acc + item.cake.price * item.quantity, 0);
+
+  // Load Razorpay Script
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const handleRazorpayPayment = async () => {
+    if (items.length === 0) return;
+    
+    setIsProcessing(true);
+    
+    // In a real app, you would create an order on your backend first
+    // For this prototype, we simulate the Razorpay options
+    const options = {
+      key: "rzp_test_placeholder", // Replace with your actual key in production
+      amount: total * 100, // Amount in paise
+      currency: "INR",
+      name: "CakeStory Luxury Desserts",
+      description: "Premium Cake Commission",
+      image: "https://ojcmohjbhbfrspwnlkag.supabase.co/storage/v1/object/public/sequences/Vanilla%20Cake.jpeg",
+      handler: function (response: any) {
+        alert("Payment Successful! ID: " + response.razorpay_payment_id);
+        setIsProcessing(false);
+        onClose();
+        // Here you would typically empty the cart and redirect to a success page
+      },
+      prefill: {
+        name: "Guest User",
+        email: "guest@example.com",
+        contact: "9999999999"
+      },
+      notes: {
+        address: "CakeStory Boutique Office"
+      },
+      theme: {
+        color: "#B19159" // Matches primary gold
+      },
+      modal: {
+        ondismiss: function() {
+          setIsProcessing(false);
+        }
+      }
+    };
+
+    const rzp = new (window as any).Razorpay(options);
+    rzp.open();
+  };
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
@@ -46,7 +101,7 @@ export function CartDrawer({ isOpen, onClose, items, onRemove }: CartDrawerProps
                   <div className="flex-1 space-y-1">
                     <h4 className="font-headline text-lg">{item.cake.name}</h4>
                     <p className="text-xs text-white/40 uppercase tracking-widest">Qty: {item.quantity}</p>
-                    <p className="text-primary font-bold text-sm">${item.cake.price * item.quantity}.00</p>
+                    <p className="text-primary font-bold text-sm">₹{(item.cake.price * item.quantity).toLocaleString()}</p>
                   </div>
                   <Button 
                     variant="ghost" 
@@ -67,10 +122,21 @@ export function CartDrawer({ isOpen, onClose, items, onRemove }: CartDrawerProps
             <div className="w-full space-y-6">
               <div className="flex justify-between items-baseline">
                 <span className="text-xs uppercase tracking-[0.4em] text-white/40 font-bold">Estimated Total</span>
-                <span className="text-2xl font-headline font-bold text-white">${total}.00</span>
+                <span className="text-2xl font-headline font-bold text-white">₹{total.toLocaleString()}</span>
               </div>
-              <Button className="w-full h-16 rounded-none bg-primary text-primary-foreground text-xs font-bold uppercase tracking-[0.3em] hover:scale-[1.02] transition-transform">
-                Complete Commission
+              <Button 
+                className="w-full h-16 rounded-none bg-primary text-primary-foreground text-xs font-bold uppercase tracking-[0.3em] hover:scale-[1.02] transition-transform disabled:opacity-50"
+                onClick={handleRazorpayPayment}
+                disabled={isProcessing}
+              >
+                {isProcessing ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Initializing Secure Payment...
+                  </>
+                ) : (
+                  "Complete Commission with Razorpay"
+                )}
               </Button>
             </div>
           </SheetFooter>

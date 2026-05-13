@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { CAKE_VARIANTS, CakeVariant } from "@/lib/constants";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, ShoppingBag, Star } from "lucide-react";
+import { ArrowUpRight, Star } from "lucide-react";
 
 interface FeaturedCakesProps {
   onViewDetails: (cake: CakeVariant) => void;
@@ -58,7 +58,7 @@ export function FeaturedCakes({ onViewDetails, onAddToCart }: FeaturedCakesProps
                   <div className="space-y-2">
                     <div className="flex justify-between items-baseline">
                       <h3 className="font-headline text-2xl text-white group-hover:text-primary transition-colors">{cake.name}</h3>
-                      <span className="text-white/40 text-[10px] font-bold tracking-widest font-headline">${cake.price}</span>
+                      <span className="text-white/40 text-[10px] font-bold tracking-widest font-headline">₹{cake.price.toLocaleString()}</span>
                     </div>
                     <p className="text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold">
                       {cake.mood.split(',')[0]}

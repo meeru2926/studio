@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Star, Plus, Minus, ShoppingBag, CreditCard, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, Plus, Minus, ShoppingBag, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CakeVariant, CAKE_VARIANTS } from "@/lib/constants";
 import { useState, useEffect } from "react";
@@ -34,7 +34,6 @@ export function ProductDetail({ product, onClose, onAddToCart, onNavigate }: Pro
         exit={{ opacity: 0 }}
         className="fixed inset-0 z-[100] bg-black overflow-hidden"
       >
-        {/* Fullscreen Animation Layer */}
         <div className="absolute inset-0 z-0">
           <AnimatePresence mode="wait">
             <motion.div
@@ -50,17 +49,13 @@ export function ProductDetail({ product, onClose, onAddToCart, onNavigate }: Pro
                 className="w-full h-full object-contain pointer-events-none"
                 alt=""
               />
-              {/* Luxury Gradients */}
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60" />
               <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent" />
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Content Overlay */}
         <div className="relative z-10 w-full h-full flex flex-col justify-between p-12 md:p-16 pt-32">
-          
-          {/* Header Action */}
           <div className="flex justify-end items-start absolute top-10 right-10">
             <Button 
               variant="ghost" 
@@ -72,7 +67,6 @@ export function ProductDetail({ product, onClose, onAddToCart, onNavigate }: Pro
             </Button>
           </div>
 
-          {/* Body */}
           <div className="grid lg:grid-cols-2 gap-32 items-center flex-1">
             <motion.div 
               initial={{ opacity: 0, x: -30 }}
@@ -107,14 +101,11 @@ export function ProductDetail({ product, onClose, onAddToCart, onNavigate }: Pro
             </motion.div>
           </div>
 
-          {/* Footer Controls */}
           <div className="flex flex-col lg:flex-row justify-between items-stretch lg:items-end gap-12 pt-10 border-t border-white/5">
-            
-            {/* Nav & Price */}
             <div className="flex gap-16 items-end">
               <div className="space-y-1">
                 <span className="text-[8px] uppercase tracking-[0.4em] text-white/20 font-bold">Commission</span>
-                <p className="font-headline text-4xl text-white">${product.price * qty}.00</p>
+                <p className="font-headline text-4xl text-white">₹{(product.price * qty).toLocaleString()}</p>
               </div>
               <div className="hidden sm:flex items-center gap-8 font-bold tracking-[0.4em] text-[8px] text-white/20 mb-2">
                 <button onClick={() => onNavigate?.(prevProduct)} className="hover:text-white transition-colors uppercase flex items-center gap-2">
@@ -126,9 +117,7 @@ export function ProductDetail({ product, onClose, onAddToCart, onNavigate }: Pro
               </div>
             </div>
 
-            {/* Actions */}
             <div className="flex flex-col sm:flex-row items-stretch gap-1">
-              {/* Qty Selector */}
               <div className="flex items-center gap-8 px-6 h-16 bg-white/5 border border-white/10">
                 <button className="text-white/20 hover:text-white" onClick={() => setQty(Math.max(1, qty - 1))}><Minus size={14} /></button>
                 <span className="text-lg font-bold font-headline w-4 text-center text-white">{qty}</span>
