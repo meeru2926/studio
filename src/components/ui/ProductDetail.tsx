@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Plus, Minus, ShoppingBag, ChevronLeft, ChevronRight, CreditCard } from "lucide-react";
+import { X, Plus, Minus, ShoppingBag, ChevronLeft, ChevronRight, CreditCard, Search, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CakeVariant, CAKE_VARIANTS } from "@/lib/constants";
 import { useState, useEffect } from "react";
@@ -34,66 +34,89 @@ export function ProductDetail({ product, onClose, onAddToCart, onNavigate }: Pro
         exit={{ opacity: 0 }}
         className="fixed inset-0 z-[100] bg-black overflow-hidden"
       >
+        {/* Cinematic Fullscreen Background */}
         <div className="absolute inset-0 z-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={product.id + "-detail-bg"}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.2 }}
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
               className="relative w-full h-full"
             >
-              <img 
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover opacity-60"
                 src={product.backgroundUrl}
-                className="w-full h-full object-contain pointer-events-none"
-                alt=""
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20" />
             </motion.div>
           </AnimatePresence>
         </div>
 
-        <div className="relative z-10 w-full h-full flex flex-col justify-between p-12 md:p-20 pt-32">
-          <div className="flex justify-end items-start absolute top-10 right-10">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="text-white/20 hover:text-white hover:bg-white/5 rounded-none h-12 w-12 border border-white/10"
-              onClick={onClose}
-            >
-              <X size={18} />
-            </Button>
-          </div>
+        {/* Content Overlay */}
+        <div className="relative z-10 w-full h-full flex flex-col p-10 md:p-16">
+          
+          {/* Top Navigation Row */}
+          <header className="flex justify-between items-center mb-12">
+            <div className="flex flex-col">
+              <span className="font-headline text-2xl tracking-tighter font-bold uppercase text-primary">CakeStory</span>
+              <span className="text-[7px] uppercase tracking-[0.4em] text-white/40 font-bold -mt-1">Luxury Cakes</span>
+            </div>
 
-          <div className="grid lg:grid-cols-2 gap-32 items-center flex-1">
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
+            <nav className="hidden lg:flex items-center gap-10 text-[9px] uppercase tracking-[0.4em] font-bold text-white/40">
+              <a href="#" className="hover:text-primary transition-colors">Home</a>
+              <a href="#" className="hover:text-primary transition-colors text-white">Cakes</a>
+              <a href="#" className="hover:text-primary transition-colors">Ingredients</a>
+              <a href="#" className="hover:text-primary transition-colors">Flavors</a>
+              <a href="#" className="hover:text-primary transition-colors">Gallery</a>
+              <a href="#" className="hover:text-primary transition-colors">Reviews</a>
+              <a href="#" className="hover:text-primary transition-colors">Contact</a>
+            </nav>
+
+            <div className="flex items-center gap-6 text-white/40">
+              <Search size={18} className="cursor-pointer hover:text-white transition-colors" />
+              <div className="relative cursor-pointer hover:text-white transition-colors">
+                <ShoppingBag size={18} />
+                <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-[8px] h-4 w-4 rounded-full flex items-center justify-center font-bold">2</span>
+              </div>
+              <X size={20} className="cursor-pointer hover:text-white transition-colors ml-4" onClick={onClose} />
+            </div>
+          </header>
+
+          {/* Main Info Area */}
+          <div className="flex-1 flex flex-col justify-center max-w-2xl">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 1 }}
-              className="max-w-md space-y-8"
+              transition={{ delay: 0.3, duration: 1 }}
+              className="space-y-8"
             >
-              <div className="space-y-2">
-                <span className="text-primary text-[7px] uppercase tracking-[0.8em] font-bold block">
+              <div className="space-y-4">
+                <span className="text-primary text-[9px] uppercase tracking-[0.6em] font-bold block">
                   {product.subtitle}
                 </span>
-                <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl text-white tracking-tighter leading-[0.95]">
+                <h2 className="font-headline text-7xl md:text-8xl text-white tracking-tighter leading-[0.9] max-w-lg">
                   {product.name}
                 </h2>
               </div>
               
-              <p className="text-white/40 text-sm md:text-base font-light leading-relaxed italic border-l border-primary/20 pl-6">
+              <p className="text-white/60 text-lg font-light leading-relaxed italic max-w-md">
                 {product.longDescription}
               </p>
 
-              <div className="space-y-4 pt-4">
-                <span className="text-primary text-[7px] uppercase tracking-[0.4em] font-bold block">Signature Specs</span>
-                <div className="grid grid-cols-2 gap-x-8 gap-y-3">
+              <div className="space-y-4 pt-6">
+                <span className="text-primary text-[9px] uppercase tracking-[0.5em] font-bold block">Ingredients</span>
+                <div className="grid grid-cols-2 gap-x-12 gap-y-3">
                   {product.ingredients.map(ing => (
                     <div key={ing} className="flex items-center gap-3">
-                      <div className="w-[1.5px] h-[1.5px] bg-primary/40" />
-                      <span className="text-[7px] text-white/50 tracking-widest uppercase font-bold">{ing}</span>
+                      <div className="w-1 h-1 rounded-full bg-primary/60" />
+                      <span className="text-[9px] text-white/50 tracking-widest uppercase font-bold">{ing}</span>
                     </div>
                   ))}
                 </div>
@@ -101,49 +124,80 @@ export function ProductDetail({ product, onClose, onAddToCart, onNavigate }: Pro
             </motion.div>
           </div>
 
-          <div className="flex flex-col lg:flex-row justify-between items-stretch lg:items-end gap-12 pt-10 border-t border-white/5">
-            <div className="flex gap-16 items-end">
+          {/* Bottom Interaction Area */}
+          <footer className="mt-auto pt-10 grid grid-cols-1 md:grid-cols-2 items-end gap-12">
+            
+            {/* Left: Price & Rating */}
+            <div className="flex gap-20">
               <div className="space-y-1">
-                <span className="text-[7px] uppercase tracking-[0.4em] text-white/20 font-bold">Commission</span>
-                <p className="font-headline text-3xl text-white">₹{(product.price * qty).toLocaleString()}</p>
+                <span className="text-[8px] uppercase tracking-[0.4em] text-white/30 font-bold">Price</span>
+                <p className="font-headline text-4xl text-white">₹{product.price.toLocaleString()}</p>
               </div>
-              <div className="hidden sm:flex items-center gap-8 font-bold tracking-[0.4em] text-[7px] text-white/20 mb-2">
-                <button onClick={() => onNavigate?.(prevProduct)} className="hover:text-white transition-colors uppercase flex items-center gap-2">
-                  <ChevronLeft size={10} /> Prev
-                </button>
-                <button onClick={() => onNavigate?.(nextProduct)} className="hover:text-white transition-colors uppercase flex items-center gap-2">
-                  Next <ChevronRight size={10} />
-                </button>
+              <div className="space-y-2">
+                <span className="text-[8px] uppercase tracking-[0.4em] text-white/30 font-bold">Rating</span>
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={14} className={i < 4 ? "text-primary fill-primary" : "text-white/20"} />
+                  ))}
+                </div>
+                <p className="text-[10px] text-white/40 font-bold tracking-widest">4.7 (128 reviews)</p>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-stretch gap-1">
-              <div className="flex items-center gap-8 px-6 h-14 bg-white/5 border border-white/10">
+            {/* Right: Actions */}
+            <div className="flex flex-wrap items-center justify-end gap-4">
+              <div className="flex items-center gap-6 px-6 h-12 bg-white/5 border border-white/10">
                 <button className="text-white/20 hover:text-white" onClick={() => setQty(Math.max(1, qty - 1))}><Minus size={12} /></button>
-                <span className="text-base font-bold font-headline w-4 text-center text-white">{qty}</span>
+                <span className="text-sm font-bold font-headline w-4 text-center text-white">{qty}</span>
                 <button className="text-white/20 hover:text-white" onClick={() => setQty(qty + 1)}><Plus size={12} /></button>
               </div>
 
-              <div className="flex gap-1">
-                <Button 
-                  className="flex-1 h-14 px-12 rounded-none bg-white text-black font-bold uppercase tracking-[0.4em] text-[8px] hover:bg-white/90"
-                  onClick={() => {
-                    onAddToCart(product, qty);
-                    onClose();
-                  }}
-                >
-                  <CreditCard size={10} className="mr-3" /> Buy Now
-                </Button>
-                <Button 
-                  variant="outline"
-                  className="flex-1 h-14 px-12 rounded-none border-white/20 text-white bg-black/40 backdrop-blur-md font-bold uppercase tracking-[0.4em] text-[8px] hover:bg-white hover:text-black"
-                  onClick={() => onAddToCart(product, qty)}
-                >
-                  <ShoppingBag size={10} className="mr-3" /> Add to Cart
-                </Button>
-              </div>
+              <Button 
+                variant="outline"
+                className="h-12 px-10 rounded-none border-primary/40 text-primary bg-transparent font-bold uppercase tracking-[0.4em] text-[8px] hover:bg-primary hover:text-primary-foreground transition-all"
+                onClick={() => onAddToCart(product, qty)}
+              >
+                <ShoppingBag size={10} className="mr-3" /> Add to Cart
+              </Button>
+              
+              <Button 
+                className="h-12 px-10 rounded-none bg-primary text-primary-foreground font-bold uppercase tracking-[0.4em] text-[8px] hover:scale-105 transition-transform"
+                onClick={() => {
+                  onAddToCart(product, qty);
+                  // Trigger direct checkout flow would go here
+                }}
+              >
+                Buy Now
+              </Button>
             </div>
+          </footer>
+
+          {/* Bottom Most Navigation */}
+          <div className="flex justify-between items-center mt-12 pt-6 border-t border-white/5">
+             <button 
+              onClick={() => onNavigate?.(prevProduct)} 
+              className="text-[9px] text-white/40 hover:text-white transition-colors uppercase tracking-[0.5em] flex items-center gap-4 font-bold"
+            >
+              <ChevronLeft size={14} /> Prev Cake
+            </button>
+            
+            <div className="flex gap-4">
+              {CAKE_VARIANTS.map((_, i) => (
+                <div 
+                  key={i} 
+                  className={`h-1.5 w-1.5 rounded-full ${i === currentIndex ? 'bg-primary' : 'bg-white/10'}`} 
+                />
+              ))}
+            </div>
+
+            <button 
+              onClick={() => onNavigate?.(nextProduct)} 
+              className="text-[9px] text-white/40 hover:text-white transition-colors uppercase tracking-[0.5em] flex items-center gap-4 font-bold"
+            >
+              Next Cake <ChevronRight size={14} />
+            </button>
           </div>
+
         </div>
       </motion.div>
     </AnimatePresence>
